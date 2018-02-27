@@ -1,0 +1,6 @@
+<Project>
+    <PropertyGroup>
+        <Deterministic>true</Deterministic>
+        <Features>pdb-path-determinism</Features>
+    </PropertyGroup>
+</Project>

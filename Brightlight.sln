@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brightlight.ConsoleDemo", "Brightlight.Console\Brightlight.ConsoleDemo.csproj", "{F59BCD5E-C8A8-4B85-869F-8ED37CBE64CC}"
 EndProject
@@ -69,10 +69,13 @@ Global
 		{C9133CFD-DB43-43B9-8BBB-843002C9B680}.Release|iPhone.Build.0 = Release|Any CPU
 		{C9133CFD-DB43-43B9-8BBB-843002C9B680}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{C9133CFD-DB43-43B9-8BBB-843002C9B680}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{C9133CFD-DB43-43B9-8BBB-843002C9B680}.Release|x86.ActiveCfg = Release|Any CPU
-		{C9133CFD-DB43-43B9-8BBB-843002C9B680}.Release|x86.Build.0 = Release|Any CPU
+		{C9133CFD-DB43-43B9-8BBB-843002C9B680}.Release|x86.ActiveCfg = Release|x86
+		{C9133CFD-DB43-43B9-8BBB-843002C9B680}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BAD18301-30B0-4858-B442-2A17028E0F98}
 	EndGlobalSection
 EndGlobal
