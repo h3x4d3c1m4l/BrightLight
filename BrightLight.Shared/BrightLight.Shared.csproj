@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <targetframeworks>net462</targetframeworks>
+    <AssemblyName>BrightLight.Shared</AssemblyName>
+    <RootNamespace>BrightLight.Shared</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.0.1" />
+    <PackageReference Include="System.Diagnostics.Process" Version="4.3.0" />
+    <PackageReference Include="System.Reactive" Version="3.1.1" />
+    <PackageReference Include="System.Reflection" Version="4.3.0" />
+    <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
+    <PackageReference Include="System.ValueTuple" Version="4.4.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BrightLight.Plugin.Builtin\BrightLight.Plugin.Builtin.csproj" />
+    <ProjectReference Include="..\Brightlight.PluginInterface\BrightLight.PluginInterface.csproj" />
+  </ItemGroup>
+</Project>

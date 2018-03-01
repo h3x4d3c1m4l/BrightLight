@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Data;
 using FontAwesome.WPF;
 
-namespace Brightlight.WPF.UI.Converters
+namespace BrightLight.WPF.UI.Converters
 {
     class FontAwesomeIdToFontAwesomeIconConverter : IValueConverter
     {

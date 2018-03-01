@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using Brightlight.WPF.Utils;
-using BrightlightLib;
-using BrightlightLib.ViewModels;
+using BrightLight.Shared.ViewModels;
 using CefSharp;
 
-namespace Brightlight.WPF
+namespace BrightLight.WPF
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -22,7 +14,7 @@ namespace Brightlight.WPF
 
         private App()
         {
-            Global.MainViewModel = new MainViewModel();
+            Global.MainViewModel = new MainViewModel(new RunOnWpfUiThread());
             _showHotKey = new HotKey(Key.Space, KeyModifier.Alt, key =>
             {
                 Global.MainViewModel.Query = string.Empty;
@@ -30,7 +22,6 @@ namespace Brightlight.WPF
             });
 
             Cef.Initialize();
-            ShortcutUtils.GetShortcutTarget = WindowsShortcutUtils.GetTargetPath;
         }
     }
 }

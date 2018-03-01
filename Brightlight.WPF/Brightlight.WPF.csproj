@@ -8,8 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C9133CFD-DB43-43B9-8BBB-843002C9B680}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Brightlight.WPF</RootNamespace>
-    <AssemblyName>Brightlight.WPF</AssemblyName>
+    <RootNamespace>BrightLight.WPF</RootNamespace>
+    <AssemblyName>BrightLight.WPF</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -108,7 +108,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RunOnWpfUiThread.cs" />
-    <Compile Include="Utils\WindowsShortcutUtils.cs" />
     <Page Include="UI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -147,9 +146,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BrightlightLib\BrightlightLib.csproj">
+    <ProjectReference Include="..\BrightLight.Plugin.Builtin\BrightLight.Plugin.Builtin.csproj">
+      <Project>{111958b1-c0a9-42bd-9056-16967cdf5c94}</Project>
+      <Name>BrightLight.Plugin.Builtin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Brightlight.PluginInterface\BrightLight.PluginInterface.csproj">
+      <Project>{2c766595-8148-4e4c-b92c-9498f7af2407}</Project>
+      <Name>BrightLight.PluginInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BrightLight.Shared\BrightLight.Shared.csproj">
       <Project>{6686b407-67ec-47d4-a58f-5564c23694f1}</Project>
-      <Name>BrightlightLib</Name>
+      <Name>BrightLight.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

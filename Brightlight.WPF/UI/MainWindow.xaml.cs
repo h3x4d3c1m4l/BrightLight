@@ -18,13 +18,13 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BrightlightLib.Models;
-using BrightlightLib.ViewModels;
+using BrightLight.Shared.ViewModels;
+using BrightLight.PluginInterface.Result;
 using CefSharp;
 using CefSharp.Wpf;
 using Image = System.Windows.Controls.Image;
 
-namespace Brightlight.WPF.UI
+namespace BrightLight.WPF.UI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -34,7 +34,6 @@ namespace Brightlight.WPF.UI
         public MainWindow()
         {
             InitializeComponent();
-            MainViewModel.UIThreadHelper = new RunOnWpfUiThread();
             Global.MainViewModel.PropertyChanged += (sender, args) =>
             {
                 if (args.PropertyName != nameof(MainViewModel.QueryNotEmpty)) return;
@@ -78,7 +77,7 @@ namespace Brightlight.WPF.UI
 
         private void HtmlRendererInitialized(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (Global.MainViewModel.SelectedSearchResult is HtmlResult htmlResult)
+            if (Global.MainViewModel.SelectedSearchResult is HtmlSearchResult htmlResult)
             {
                 var html = htmlResult.Html;
                 var browser = (ChromiumWebBrowser) sender;

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Brightlight.WPF.UI;
-using BrightlightLib.ViewModels;
+using BrightLight.WPF.UI;
+using BrightLight.Shared.ViewModels;
 
-namespace Brightlight.WPF
+namespace BrightLight.WPF
 {
     public static class Global
     {

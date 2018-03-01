@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Brightlight.WPF.UI.Converters
+namespace BrightLight.WPF.UI.Converters
 {
     class BoolToVisibilityConverter : IValueConverter
     {

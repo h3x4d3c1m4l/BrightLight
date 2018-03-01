@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace Brightlight.WPF.UI.Converters
+namespace BrightLight.WPF.UI.Converters
 {
     class ResultCountToVisibilityConverter : IValueConverter
     {

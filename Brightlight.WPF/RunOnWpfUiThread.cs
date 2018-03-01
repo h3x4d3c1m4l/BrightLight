@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using BrightlightLib;
+using BrightLight.PluginInterface;
 
-namespace Brightlight.WPF
+namespace BrightLight.WPF
 {
-    class RunOnWpfUiThread : IRunOnUiThread
+    class RunOnWpfUiThread : IRunOnUiThreadHelper
     {
         public void RunOnUIThread(Action action)
         {
-            Global.MainWindow.Dispatcher.Invoke(action);
+            Global.MainWindow?.Dispatcher.Invoke(action);
         }
     }
 }
