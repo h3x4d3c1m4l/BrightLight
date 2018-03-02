@@ -169,11 +169,16 @@ namespace BrightLight.Shared.ViewModels
             var searchProviders = new List<ISearchProvider>();
             foreach (var a in pluginAssemblies)
             {
-                var currentAssemblyTypes = a.GetTypes().Where(y => typeof(ISearchProvider).IsAssignableFrom(y) && !y.IsInterface);
-                
-                foreach (var t in currentAssemblyTypes)
+                var currentAssemblyPluginTypes = a.GetTypes().Where(y => typeof(IPlugin).IsAssignableFrom(y) && !y.IsInterface);
+
+                foreach (var p in currentAssemblyPluginTypes)
                 {
-                    searchProviders.Add((ISearchProvider)Activator.CreateInstance(t));
+                    var plugin = (IPlugin)Activator.CreateInstance(p);
+                    var pluginSearchProviders = plugin.Init(runOnUiThreadHelper);
+                    foreach (var pSP in pluginSearchProviders)
+                    {
+                        searchProviders.Add(pSP);
+                    }
                 }
             }
             

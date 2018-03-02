@@ -38,7 +38,7 @@ namespace BrightLight.Plugin.Builtin.Providers
                 catch (Exception ex)
                 {
                     // expression valid, but can't be calculated
-                    evaluated = null;
+                    return null;
                 }
             }
             catch (Exception ex)
