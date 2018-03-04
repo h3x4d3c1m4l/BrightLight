@@ -49,6 +49,9 @@
   <PropertyGroup>
     <ApplicationIcon>simple-icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MathParser.org-mXparser.Net462, Version=4.0.0.2, Culture=neutral, PublicKeyToken=0fbab7add73ed6e2, processorArchitecture=MSIL">
       <HintPath>..\packages\MathParser.org-mXparser.4.0.0.2\lib\net462\MathParser.org-mXparser.Net462.dll</HintPath>
@@ -146,6 +149,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
