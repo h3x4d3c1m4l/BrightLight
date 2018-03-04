@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using BrightLight.Shared.ViewModels;
+using BrightLight.WPF.UI;
 using CefSharp;
 
 namespace BrightLight.WPF
@@ -15,6 +16,8 @@ namespace BrightLight.WPF
         private App()
         {
             Global.MainViewModel = new MainViewModel(new RunOnWpfUiThread());
+            MainWindow = Global.MainWindow = new MainWindow();
+            Global.SettingsWindow = new SettingsWindow();
             _showHotKey = new HotKey(Key.Space, KeyModifier.Alt, key =>
             {
                 Global.MainViewModel.Query = string.Empty;

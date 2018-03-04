@@ -12,5 +12,6 @@ namespace BrightLight.WPF
     {
         public static MainViewModel MainViewModel { get; set; }
         public static MainWindow MainWindow { get; set; }
+        public static SettingsWindow SettingsWindow { get; set; }
     }
 }

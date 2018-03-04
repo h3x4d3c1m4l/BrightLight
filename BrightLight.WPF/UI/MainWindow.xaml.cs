@@ -122,5 +122,21 @@ namespace BrightLight.WPF.UI
             var lv = (ListView) sender;
             lv.SelectedItems.Clear();
         }
+
+        private void OpenSearchClick(object sender, RoutedEventArgs e)
+        {
+            ShowMe();
+        }
+
+        private void ExitClick(object sender, RoutedEventArgs e)
+        {
+            Global.MainViewModel.PrepareApplicationExit();
+            Close();
+        }
+
+        private void OpenSettingsClick(object sender, RoutedEventArgs e)
+        {
+            Global.SettingsWindow.Show();
+        }
     }
 }

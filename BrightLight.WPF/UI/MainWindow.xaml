@@ -11,6 +11,7 @@
         xmlns:ui="clr-namespace:BrightLight.WPF.UI"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:resultTypes="clr-namespace:BrightLight.PluginInterface.Result;assembly=BrightLight.PluginInterface"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
         Background="Transparent"
         Name="BrightlightMainWindow" Height="500"
@@ -41,6 +42,30 @@
 
     <Border CornerRadius="15,15,15,15" Background="#DDFFFFFF" x:Name="Border" Height="60">
         <Grid>
+            <!-- Taskbar icon BEGIN -->
+            <tb:TaskbarIcon ToolTipText="BrightLight" IconSource="..\simple-icon.ico">
+                <tb:TaskbarIcon.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Open search" Click="OpenSearchClick">
+                            <MenuItem.Icon>
+                                <fa:ImageAwesome Icon="Search" HorizontalAlignment="Center" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Settings" Click="OpenSettingsClick">
+                            <MenuItem.Icon>
+                                <fa:ImageAwesome Icon="Cogs" HorizontalAlignment="Center" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Exit" Click="ExitClick">
+                            <MenuItem.Icon>
+                                <fa:ImageAwesome Icon="SignOut" HorizontalAlignment="Center" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </tb:TaskbarIcon.ContextMenu>
+            </tb:TaskbarIcon>
+            <!-- Taskbar icon END -->
             <DockPanel>
                 <Grid DockPanel.Dock="Top" Height="60">
                     <DockPanel>

@@ -128,6 +128,11 @@ namespace BrightLight.Shared.ViewModels
             }
         }
 
+        public void PrepareApplicationExit()
+        {
+            // nothing to deinit yet
+        }
+
         public SearchResult SelectedSearchResult
         {
             get => _selectedSearchResult;
