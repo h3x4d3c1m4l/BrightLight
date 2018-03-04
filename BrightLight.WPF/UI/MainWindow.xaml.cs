@@ -23,6 +23,9 @@ using BrightLight.PluginInterface.Result;
 using CefSharp;
 using CefSharp.Wpf;
 using Image = System.Windows.Controls.Image;
+using System.Windows.Forms;
+using ListView = System.Windows.Controls.ListView;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace BrightLight.WPF.UI
 {
@@ -31,8 +34,15 @@ namespace BrightLight.WPF.UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private WindowInteropHelper _windowInteropHelper;
+
+        public int TopWhenNoResults { get; set; }
+
+        public int TopWhenResults { get; set; }
+
         public MainWindow()
         {
+            _windowInteropHelper = new WindowInteropHelper(this);
             InitializeComponent();
             Global.MainViewModel.PropertyChanged += (sender, args) =>
             {
@@ -42,7 +52,6 @@ namespace BrightLight.WPF.UI
                     sb = FindResource("ShowResultsAnimation") as Storyboard;
                 else
                     sb = FindResource("HideResultsAnimation") as Storyboard;
-                Storyboard.SetTarget(sb, Border);
                 sb.Begin();
             };
             Global.MainWindow = this;
@@ -71,7 +80,7 @@ namespace BrightLight.WPF.UI
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            //EnableBlur();
+            EnableBlur();
             SearchTermTextBox.Focus();
         }
 
@@ -103,6 +112,16 @@ namespace BrightLight.WPF.UI
         
         public void ShowMe()
         {
+            var cursorPos = System.Windows.Forms.Cursor.Position;
+            var screen = Screen.FromPoint(new System.Drawing.Point(cursorPos.X, cursorPos.Y));
+            var screenBounds = screen.Bounds;
+
+            Left = (int) ((screenBounds.Width / 2) - (Width / 2) + screenBounds.X);
+            TopWhenNoResults = (screenBounds.Height / 2) - (60 / 2) + screenBounds.Y;
+            TopWhenResults = (screenBounds.Height / 2) - (500 / 2) + screenBounds.Y;
+            Top = TopWhenNoResults;
+
+            // detect on which
             Show();
             (FindResource("ShowMe") as Storyboard).Begin(Border);
         }

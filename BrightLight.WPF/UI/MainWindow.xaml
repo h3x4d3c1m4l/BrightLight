@@ -8,14 +8,13 @@
         xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:controls="clr-namespace:WpfMath.Controls;assembly=WpfMath"
         xmlns:converters="clr-namespace:BrightLight.WPF.UI.Converters"
-        xmlns:ui="clr-namespace:BrightLight.WPF.UI"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:resultTypes="clr-namespace:BrightLight.PluginInterface.Result;assembly=BrightLight.PluginInterface"
         xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
         Background="Transparent"
-        Name="BrightlightMainWindow" Height="500"
-        Title="MainWindow" Width="750" Topmost="True" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" DataContext="{x:Static local:Global.MainViewModel}" Loaded="WindowLoaded" KeyDown="KeyboardKeyDown" ShowInTaskbar="False">
+        Name="BrightLightMainWindow" Height="60" UseLayoutRounding="True"
+        Title="MainWindow" Width="750" Topmost="True" WindowStyle="None" AllowsTransparency="True" DataContext="{x:Static local:Global.MainViewModel}" Loaded="WindowLoaded" KeyDown="KeyboardKeyDown" ShowInTaskbar="False">
     <Window.Resources>
         <Style TargetType="{x:Type Border}">
             <Setter Property="CornerRadius" Value="15"/>
@@ -25,17 +24,21 @@
         <converters:FontAwesomeIdToFontAwesomeIconConverter x:Key="FontAwesomeIdToFontAwesomeIconConverter"/>
         <converters:BitmapToBitmapImageConverter x:Key="BitmapToBitmapImageConverter"/>
         <converters:ResultCountToVisibilityConverter x:Key="ResultCountToVisibilityConverter"/>
-        <Storyboard x:Key="ShowResultsAnimation">
-            <DoubleAnimation Storyboard.TargetProperty="Height" To="500" Duration="0:0:.1" />
+        <Storyboard x:Key="ShowResultsAnimation" Timeline.DesiredFrameRate="60">
+            <DoubleAnimation Storyboard.Target="{x:Reference Name=BrightLightMainWindow}" Storyboard.TargetProperty="Height" To="500" Duration="0:0:.1" />
+            <DoubleAnimation Storyboard.Target="{x:Reference Name=BrightLightMainWindow}" Storyboard.TargetProperty="Top" To="{Binding ElementName=BrightLightMainWindow, Path=TopWhenResults}" Duration="0:0:.1" />
+            <DoubleAnimation Storyboard.Target="{x:Reference Name=Border}" Storyboard.TargetProperty="Height" To="500" Duration="0:0:.1" />
         </Storyboard>
-        <Storyboard x:Key="HideResultsAnimation">
-            <DoubleAnimation Storyboard.TargetProperty="Height" To="60" Duration="0:0:.1" />
+        <Storyboard x:Key="HideResultsAnimation" Timeline.DesiredFrameRate="60">
+            <DoubleAnimation Storyboard.Target="{x:Reference Name=BrightLightMainWindow}" Storyboard.TargetProperty="Height" To="60" Duration="0:0:.1" />
+            <DoubleAnimation Storyboard.Target="{x:Reference Name=BrightLightMainWindow}" Storyboard.TargetProperty="Top" To="{Binding ElementName=BrightLightMainWindow, Path=TopWhenNoResults}" Duration="0:0:.1" />
+            <DoubleAnimation Storyboard.Target="{x:Reference Name=Border}" Storyboard.TargetProperty="Height" To="60" Duration="0:0:.1" />
         </Storyboard>
         <!-- https://stackoverflow.com/questions/4501754/wpf-animate-window-visibility-change -->
-        <Storyboard x:Key="HideMe">
+        <Storyboard x:Key="HideMe" Storyboard.Target="{x:Reference Name=BrightLightMainWindow}">
             <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:.1" To="0" Completed="HideMeCompleted"/>
         </Storyboard>
-        <Storyboard x:Key="ShowMe">
+        <Storyboard x:Key="ShowMe" Storyboard.Target="{x:Reference Name=BrightLightMainWindow}">
             <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:.1" To="1"/>
         </Storyboard>
     </Window.Resources>
