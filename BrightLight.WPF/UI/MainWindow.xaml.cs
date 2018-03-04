@@ -112,19 +112,31 @@ namespace BrightLight.WPF.UI
         
         public void ShowMe()
         {
-            var cursorPos = System.Windows.Forms.Cursor.Position;
-            var screen = Screen.FromPoint(new System.Drawing.Point(cursorPos.X, cursorPos.Y));
-            var screenBounds = screen.Bounds;
-
-            Left = (int) ((screenBounds.Width / 2) - (Width / 2) + screenBounds.X);
-            TopWhenNoResults = (screenBounds.Height / 2) - (60 / 2) + screenBounds.Y;
-            TopWhenResults = (screenBounds.Height / 2) - (500 / 2) + screenBounds.Y;
-            Top = TopWhenNoResults;
+            moveApplicationToCenterOfCurrentScreen();
 
             // detect on which
             Show();
             (FindResource("ShowMe") as Storyboard).Begin(Border);
         }
+
+        protected override void OnDpiChanged(DpiScale oldDpiScale, DpiScale newDpiScale)
+        {
+            moveApplicationToCenterOfCurrentScreen();
+        }
+
+        private void moveApplicationToCenterOfCurrentScreen()
+        {
+            var cursorPos = System.Windows.Forms.Cursor.Position;
+            var screen = Screen.FromPoint(new System.Drawing.Point(cursorPos.X, cursorPos.Y));
+            var screenBounds = screen.Bounds;
+
+            var dpiInfo = VisualTreeHelper.GetDpi(this);
+            Left = (int)((screenBounds.Width / dpiInfo.DpiScaleX / 2) - (Width / 2) + screenBounds.X / dpiInfo.DpiScaleX);
+            TopWhenNoResults = (int) ((screenBounds.Height / dpiInfo.DpiScaleY / 2) - (60 / 2) + screenBounds.Y);
+            TopWhenResults = (int) ((screenBounds.Height / dpiInfo.DpiScaleY / 2) - (500 / 2) + screenBounds.Y);
+            Top = TopWhenNoResults;
+        }
+
         private void HideMe()
         {
             (FindResource("HideMe") as Storyboard).Begin(Border);
