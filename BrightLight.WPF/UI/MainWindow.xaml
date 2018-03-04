@@ -15,7 +15,7 @@
         mc:Ignorable="d"
         Background="Transparent"
         Name="BrightlightMainWindow" Height="500"
-        Title="MainWindow" Width="750" Topmost="True" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" DataContext="{x:Static local:Global.MainViewModel}" Loaded="WindowLoaded" KeyDown="KeyboardKeyDown">
+        Title="MainWindow" Width="750" Topmost="True" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" DataContext="{x:Static local:Global.MainViewModel}" Loaded="WindowLoaded" KeyDown="KeyboardKeyDown" ShowInTaskbar="False">
     <Window.Resources>
         <Style TargetType="{x:Type Border}">
             <Setter Property="CornerRadius" Value="15"/>
