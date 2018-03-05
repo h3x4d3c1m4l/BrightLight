@@ -11,9 +11,7 @@ Builds will be regularly provided soon.
 * Basic plugin system
 
 ## Roadmap
-* Application icons working again
 * Extend plugin system
-* Tray icon
 * Builds on a regular base
 * Different delays per search provider
   * This will make searching the start menu a lot faster

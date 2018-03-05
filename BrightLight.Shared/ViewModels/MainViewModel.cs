@@ -27,6 +27,8 @@ namespace BrightLight.Shared.ViewModels
             {
                 if (query == value) return;
                 query = value;
+                if (_searchCancellationTokenSource != null && !_searchCancellationTokenSource.IsCancellationRequested)
+                    _searchCancellationTokenSource.Cancel();
                 _runOnUiThreadHelper.RunOnUIThread(() =>
                 {
                     // clear the search results
@@ -82,9 +84,6 @@ namespace BrightLight.Shared.ViewModels
 
         private void StartQuerying(string queryString)
         {
-            if (_searchCancellationTokenSource != null && !_searchCancellationTokenSource.IsCancellationRequested)
-                _searchCancellationTokenSource.Cancel();
-
             var q = queryString ?? query;
             if (string.IsNullOrWhiteSpace(q)) return;
             _runOnUiThreadHelper.RunOnUIThread(() =>
