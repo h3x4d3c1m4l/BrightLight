@@ -1,4 +1,4 @@
-﻿using Brightlight.PluginInterface.Result.Helpers;
+﻿using BrightLight.PluginInterface.Result.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;

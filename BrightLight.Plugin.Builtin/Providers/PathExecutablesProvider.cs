@@ -87,20 +87,6 @@ namespace BrightLight.Plugin.Builtin.Providers
             return (filename, arguments);
         }
 
-        //private Bitmap GetBitmapFromApplicationExe(string exePath)
-        //{
-        //    var ie = new IconExtractor.IconExtractor(exePath);
-        //    if (ie.Count == 0)
-        //    {
-        //        return null;
-        //    }
-
-        //    var icon0 = ie.GetIcon(0);
-        //    var icons = IconUtil.Split(icon0);
-        //    var icon = icons.OrderByDescending(x => x.Height * x.Width).First();
-        //    return icon.ToBitmap();
-        //}
-
         public async Task<SearchResultCollection> SearchAsync(SearchQuery query, CancellationToken ct)
         {
             string title, launchExePath, launchParameters;
@@ -152,8 +138,8 @@ namespace BrightLight.Plugin.Builtin.Providers
                 new ExecutableSearchResult
                 {
                     Title = title,
-                    LaunchExePath = launchExePath,
-                    LaunchParameters = launchParameters,
+                    LaunchPath = launchExePath,
+                    LaunchArguments = launchParameters,
                     ParentCollection = results,
                     //Icon = GetBitmapFromApplicationExe(launchExePath)
                 }

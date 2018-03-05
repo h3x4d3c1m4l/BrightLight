@@ -32,8 +32,9 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Media.Imaging;
 
-namespace BrightLight.Shared.IconExtractor
+namespace BrightLight.WPF.IconUtils
 {
     public class IconExtractor
     {

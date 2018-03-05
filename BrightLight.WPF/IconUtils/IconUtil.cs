@@ -32,7 +32,7 @@ using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace BrightLight.Shared.IconExtractor
+namespace BrightLight.WPF.IconUtils
 {
     public static class IconUtil
     {

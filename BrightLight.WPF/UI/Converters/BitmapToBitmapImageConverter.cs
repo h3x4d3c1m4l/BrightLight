@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BrightLight.PluginInterface.Result.Helpers;
+using BrightLight.WPF.IconUtils;
+using System;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
@@ -16,7 +15,28 @@ namespace BrightLight.WPF.UI.Converters
         // https://stackoverflow.com/questions/22499407/how-to-display-a-bitmap-in-a-wpf-image
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Bitmap bitmap)
+            if (value is ExecutableIcon)
+            {
+                // extract icon van exe
+                var executableIcon = value as ExecutableIcon;
+                //var icon = Icon.ExtractAssociatedIcon(executableIcon.ExecutablePath);
+                var extractor = new IconExtractor(executableIcon.ExecutablePath);
+                var iconCollection = extractor.GetIcon(0);
+                var biggestIcon = IconUtil.Split(iconCollection).OrderByDescending(x => x.Width * x.Height).FirstOrDefault();
+                if (biggestIcon != null)
+                    return CreateBitmapImageFromBitmap(biggestIcon.ToBitmap());
+            }
+
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        private BitmapImage CreateBitmapImageFromBitmap(Bitmap bitmap)
+        {
             using (var memory = new MemoryStream())
             {
                 bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
@@ -29,12 +49,6 @@ namespace BrightLight.WPF.UI.Converters
 
                 return bitmapimage;
             }
-            return null;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
         }
     }
 }

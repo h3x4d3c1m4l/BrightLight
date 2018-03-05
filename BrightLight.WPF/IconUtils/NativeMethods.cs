@@ -30,7 +30,7 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
 
-namespace BrightLight.Shared.IconExtractor
+namespace BrightLight.WPF.IconUtils
 {
     internal static class NativeMethods
     {

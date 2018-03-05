@@ -52,9 +52,9 @@ namespace BrightLight.Shared.ViewModels
         {
             if (SelectedSearchResult == null) return false;
             var result = SelectedSearchResult;
-            if (!(result is UrlSearchResult) && !string.IsNullOrWhiteSpace(result.LaunchExePath))
+            if (!(result is UrlSearchResult) && !string.IsNullOrWhiteSpace(result.LaunchPath))
             {
-                var processStartInfo = new ProcessStartInfo(result.LaunchExePath, result.LaunchParameters) {UseShellExecute = true};
+                var processStartInfo = new ProcessStartInfo(result.LaunchPath, result.LaunchArguments) {UseShellExecute = true};
                 Process.Start(processStartInfo);
                 return true;
             }

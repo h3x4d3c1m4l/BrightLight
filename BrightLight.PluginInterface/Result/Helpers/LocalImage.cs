@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Brightlight.PluginInterface.Result.Helpers
+namespace BrightLight.PluginInterface.Result.Helpers
 {
     public class LocalImage : IImage
     {

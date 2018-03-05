@@ -1,4 +1,4 @@
-﻿using Brightlight.PluginInterface.Result.Helpers;
+﻿using BrightLight.PluginInterface.Result.Helpers;
 using BrightLight.Plugin.Builtin.Providers;
 using BrightLight.PluginInterface;
 using System;

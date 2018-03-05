@@ -8,19 +8,24 @@ using System.Threading.Tasks;
 using BrightLight.Plugin.Builtin;
 using BrightLight.PluginInterface;
 using BrightLight.PluginInterface.Result;
+using BrightLight.PluginInterface.Result.Helpers;
 
 namespace BrightLight.Plugin.Builtin.Providers
 {
     public class StartMenuProvider : ISearchProvider
     {
-        private string allUsersStartMenuPath;
+        private string _allUsersStartMenuPath;
 
-        private string currentUserStartMenuPath;
+        private string _currentUserStartMenuPath;
+
+        private dynamic _wscriptShell;
 
         public StartMenuProvider()
         {
-            allUsersStartMenuPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu);
-            currentUserStartMenuPath = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu);
+            var wscriptShellType = Type.GetTypeFromProgID("WScript.Shell");
+            _wscriptShell = Activator.CreateInstance(wscriptShellType);
+            _allUsersStartMenuPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu);
+            _currentUserStartMenuPath = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu);
         }
 
         public void Dispose()
@@ -63,8 +68,8 @@ namespace BrightLight.Plugin.Builtin.Providers
         public async Task<SearchResultCollection> SearchAsync(SearchQuery query, CancellationToken ct)
         {
             var files = new List<string>();
-            addFiles(allUsersStartMenuPath, files);
-            addFiles(currentUserStartMenuPath, files);
+            addFiles(_allUsersStartMenuPath, files);
+            addFiles(_currentUserStartMenuPath, files);
 
             var results = new SearchResultCollection
             {
@@ -73,7 +78,6 @@ namespace BrightLight.Plugin.Builtin.Providers
                 FontAwesomeIcon = "bars"
             };
             results.Results = new ObservableCollection<SearchResult>();
-            files.Add(@"C:\pannekoek.exe");
             foreach (var f in files)
             {
                 var filenameWithoutExtension = Path.GetFileNameWithoutExtension(f);
@@ -83,7 +87,7 @@ namespace BrightLight.Plugin.Builtin.Providers
                 {
                     Title = filenameWithoutExtension,
                     ParentCollection = results,
-                    LaunchExePath = f,
+                    LaunchPath = f,
                 });
             }
             if (results.Results.Count == 0)
@@ -94,8 +98,8 @@ namespace BrightLight.Plugin.Builtin.Providers
                 var toDelete = new List<SearchResult>();
                 foreach (var r in results.Results)
                 {
-                    if (Directory.Exists(r.LaunchExePath) || !File.Exists(r.LaunchExePath) ||
-                        !r.LaunchExePath.EndsWith(".lnk", StringComparison.CurrentCultureIgnoreCase))
+                    if (Directory.Exists(r.LaunchPath) || !File.Exists(r.LaunchPath) ||
+                        !r.LaunchPath.EndsWith(".lnk", StringComparison.CurrentCultureIgnoreCase))
                     {
                         toDelete.Add(r);
                         continue;
@@ -103,18 +107,13 @@ namespace BrightLight.Plugin.Builtin.Providers
 
                     try
                     {
-                        //var shellAppType = Type.GetTypeFromProgID("Shell.Application");
-                        //var shell = Activator.CreateInstance(shellAppType);
-                        //var nameSpace = (dynamic)shellAppType.InvokeMember("NameSpace", System.Reflection.BindingFlags.InvokeMethod, null, shell, new object[] { Path.GetDirectoryName(r.LaunchExePath) });
-                        //var shortcutTarget = nameSpace?.Items()?.Item(Path.GetFileName(r.LaunchExePath))?.GetLink()?.Path;
-                        //if (!string.IsNullOrWhiteSpace(shortcutTarget))
-                        //{
-                        //    // TODO: find icon
-                        //}
-
-                        //var target = ShortcutUtils.GetShortcutTarget(r.LaunchExePath);
-                        //var icon = GetBitmapFromApplicationExe(target);
-                        //r.Icon = icon;
+                        var shortcut = _wscriptShell.CreateShortcut(r.LaunchPath);
+                        var shortcutTarget = shortcut.TargetPath.ToString();
+                        var shortcutArguments = shortcut.Arguments.ToString();
+                        if (!string.IsNullOrWhiteSpace(shortcutTarget) && shortcutTarget.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
+                        {
+                            r.Icon = new ExecutableIcon { ExecutablePath = shortcutTarget };
+                        }
                     }
                     catch (Exception)
                     {

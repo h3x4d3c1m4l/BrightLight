@@ -1,4 +1,4 @@
-﻿using Brightlight.PluginInterface.Result.Helpers;
+﻿using BrightLight.PluginInterface.Result.Helpers;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.CompilerServices;
@@ -21,9 +21,9 @@ namespace BrightLight.PluginInterface.Result
             set { _icon = value; OnPropertyChanged(); }
         } // e.g. extracted application executable icon
 
-        public string LaunchExePath { get; set; }
+        public string LaunchPath { get; set; }
 
-        public string LaunchParameters { get; set; }
+        public string LaunchArguments { get; set; }
 
         #region INotifyPropertyChanged implementation
 

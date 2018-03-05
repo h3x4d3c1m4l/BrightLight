@@ -106,6 +106,9 @@
     </ApplicationDefinition>
     <Compile Include="DWMBlurHack.cs" />
     <Compile Include="HotKey.cs" />
+    <Compile Include="IconUtils\IconExtractor.cs" />
+    <Compile Include="IconUtils\IconUtil.cs" />
+    <Compile Include="IconUtils\NativeMethods.cs" />
     <Compile Include="UI\Converters\ResultCountToVisibilityConverter.cs" />
     <Compile Include="UI\Converters\BitmapToBitmapImageConverter.cs" />
     <Compile Include="UI\Converters\FontAwesomeIdToFontAwesomeIconConverter.cs" />
