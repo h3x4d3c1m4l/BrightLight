@@ -117,6 +117,8 @@ namespace BrightLight.WPF.UI
             // detect on which
             Show();
             (FindResource("ShowMe") as Storyboard).Begin(Border);
+            Activate();
+            SearchTermTextBox.Focus();
         }
 
         protected override void OnDpiChanged(DpiScale oldDpiScale, DpiScale newDpiScale)
