@@ -19,12 +19,18 @@ namespace BrightLight.WPF.UI.Converters
             {
                 // extract icon van exe
                 var executableIcon = value as ExecutableIcon;
-                //var icon = Icon.ExtractAssociatedIcon(executableIcon.ExecutablePath);
-                var extractor = new IconExtractor(executableIcon.ExecutablePath);
-                var iconCollection = extractor.GetIcon(0);
-                var biggestIcon = IconUtil.Split(iconCollection).OrderByDescending(x => x.Width * x.Height).FirstOrDefault();
-                if (biggestIcon != null)
-                    return CreateBitmapImageFromBitmap(biggestIcon.ToBitmap());
+                try
+                {
+                    var extractor = new IconExtractor(executableIcon.ExecutablePath);
+                    var iconCollection = extractor.GetIcon(0);
+                    var biggestIcon = IconUtil.Split(iconCollection).OrderByDescending(x => x.Width * x.Height).FirstOrDefault();
+                    if (biggestIcon != null)
+                        return CreateBitmapImageFromBitmap(biggestIcon.ToBitmap());
+                }
+                catch (Exception)
+                {
+                    // no icon, file not found or whatever
+                }
             }
 
             return null;
