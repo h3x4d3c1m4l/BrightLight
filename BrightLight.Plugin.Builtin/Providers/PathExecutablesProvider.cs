@@ -8,6 +8,7 @@ using System.Threading;
 using Microsoft.Win32;
 using BrightLight.PluginInterface.Result;
 using BrightLight.PluginInterface;
+using BrightLight.PluginInterface.Result.Helpers;
 
 namespace BrightLight.Plugin.Builtin.Providers
 {
@@ -141,7 +142,7 @@ namespace BrightLight.Plugin.Builtin.Providers
                     LaunchPath = launchExePath,
                     LaunchArguments = launchParameters,
                     ParentCollection = results,
-                    //Icon = GetBitmapFromApplicationExe(launchExePath)
+                    Icon = new ExecutableIcon { ExecutablePath = launchExePath }
                 }
             };
 
