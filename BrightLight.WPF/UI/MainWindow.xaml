@@ -43,7 +43,7 @@
         </Storyboard>
     </Window.Resources>
 
-    <Border CornerRadius="15,15,15,15" Background="#DDFFFFFF" x:Name="Border" Height="60">
+    <Border CornerRadius="15,15,15,15" Background="#AAFFFFFF" x:Name="Border" Height="60" BorderBrush="Black" BorderThickness="1">
         <Grid>
             <!-- Taskbar icon BEGIN -->
             <tb:TaskbarIcon ToolTipText="BrightLight" IconSource="..\simple-icon.ico">
@@ -71,25 +71,25 @@
             <!-- Taskbar icon END -->
             <DockPanel>
                 <Grid DockPanel.Dock="Top" Height="60">
-                    <DockPanel>
-                        <fa:ImageAwesome Margin="15,0,0,0" Height="40" Width="40" Icon="Search" Visibility="{Binding Searching, Converter={StaticResource BoolToVisibilityConverter}}" />
-                        <fa:ImageAwesome Margin="15,0,0,0" Height="40" Width="40" Icon="Cog" Spin="True" Visibility="{Binding Searching, Converter={StaticResource BoolToInvertedVisibilityConverter}}" />
-                        <Grid>
-                            <TextBox VerticalAlignment="Center" Foreground="Black" x:Name="SearchTermTextBox" Height="60" Padding="10,0,0,0" VerticalContentAlignment="Center" FontSize="25" Background="Transparent" BorderThickness="0" Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBlock IsHitTestVisible="False" Text="Brightlight search ..." VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="#888888" FontSize="25">
-                                <TextBlock.Style>
-                                    <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                        </Grid>
-                    </DockPanel>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <fa:ImageAwesome Grid.Column="0" Margin="15,0,0,0" Height="40" Width="40" Icon="Search" Visibility="{Binding Searching, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    <fa:ImageAwesome Grid.Column="0" Margin="15,0,0,0" Height="40" Width="40" Icon="Cog" Spin="True" Visibility="{Binding Searching, Converter={StaticResource BoolToInvertedVisibilityConverter}}" />
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Foreground="Black" x:Name="SearchTermTextBox" Height="60" Padding="10,0,0,0" VerticalContentAlignment="Center" FontSize="25" Background="Transparent" BorderThickness="0" Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Grid.Column="1" IsHitTestVisible="False" Text="BrightLight Search ..." VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="#888888" FontSize="25">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                 </Grid>
                 <Separator DockPanel.Dock="Top" Margin="0"/>
                 <Grid>
@@ -112,15 +112,17 @@
                                     <!-- Result set (the results from one search provider) BEGIN -->
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Background="Transparent" Visibility="{Binding Results.Count, Converter={StaticResource ResultCountToVisibilityConverter}}">
                                         <!-- Result set TITLE -->
-                                        <StackPanel Orientation="Horizontal">
-                                            <Grid Height="16" Width="16" Margin="10,0,0,0">
-                                                <Image Source="{Binding Icon, Converter={StaticResource BitmapToBitmapImageConverter}}" Width="16" Height="16" />
-                                                <fa:ImageAwesome VerticalAlignment="Center" Height="16" Width="16" Icon="{Binding FontAwesomeIcon, Converter={StaticResource FontAwesomeIdToFontAwesomeIconConverter}}" />
-                                            </Grid>
-                                            <Label VerticalAlignment="Center" Content="{Binding Title}"/>
-                                        </StackPanel>
+                                        <Grid Background="#CC000000">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="26"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Grid.Column="0" Source="{Binding Icon, Converter={StaticResource BitmapToBitmapImageConverter}}" Width="16" Height="16" Margin="10,0,0,0" />
+                                            <fa:ImageAwesome Foreground="White" Grid.Column="0" VerticalAlignment="Center" Height="16" Width="16" Margin="10,0,0,0" Icon="{Binding FontAwesomeIcon, Converter={StaticResource FontAwesomeIdToFontAwesomeIconConverter}}" />
+                                            <TextBlock Foreground="White" Grid.Column="1" Text="{Binding Title}" TextTrimming="CharacterEllipsis" Margin="10"/>
+                                        </Grid>
                                         <!-- Result set RESULTS -->
-                                        <ListView ItemsSource="{Binding Results}"
+                                        <ListView ItemsSource="{Binding Results}" Background="Transparent"
                                                   SelectedItem="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.SelectedSearchResult}"
                                                   LostFocus="ResultListViewOnLostFocus"
                                                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -169,8 +171,8 @@
                             </Style>
                         </Separator.Style>
                     </Separator>
-                    <Grid Grid.Column="2">
-                        <ContentPresenter Content="{Binding SelectedSearchResult}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid Grid.Column="2" Background="White">
+                        <ContentPresenter Content="{Binding SelectedSearchResult}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
                             <ContentPresenter.Resources>
                                 <DataTemplate DataType="{x:Type resultTypes:ExecutableSearchResult}">
                                     <StackPanel Orientation="Vertical">
