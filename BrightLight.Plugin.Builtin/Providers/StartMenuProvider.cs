@@ -112,7 +112,7 @@ namespace BrightLight.Plugin.Builtin.Providers
                         var shortcutArguments = shortcut.Arguments.ToString();
                         if (!string.IsNullOrWhiteSpace(shortcutTarget) && shortcutTarget.EndsWith(".exe", StringComparison.OrdinalIgnoreCase) && File.Exists(shortcutTarget))
                         {
-                            r.Icon = new ExecutableIcon { ExecutablePath = shortcutTarget };
+                            r.Icon = new WindowsPEResourceIcon { FilePath = shortcutTarget };
                         }
                     }
                     catch (Exception)

@@ -142,7 +142,7 @@ namespace BrightLight.Plugin.Builtin.Providers
                     LaunchPath = launchExePath,
                     LaunchArguments = launchParameters,
                     ParentCollection = results,
-                    Icon = new ExecutableIcon { ExecutablePath = launchExePath }
+                    Icon = new WindowsPEResourceIcon { FilePath = launchExePath }
                 }
             };
 

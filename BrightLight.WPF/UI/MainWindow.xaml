@@ -181,6 +181,12 @@
                                         <TextBlock Margin="0,20,0,0" Text="{Binding LaunchArguments}" FontSize="20" TextAlignment="Center" TextWrapping="Wrap"/>
                                     </StackPanel>
                                 </DataTemplate>
+                                <DataTemplate DataType="{x:Type resultTypes:ActionSearchResult}">
+                                    <StackPanel Orientation="Vertical">
+                                        <Image Source="{Binding Icon, Converter={StaticResource BitmapToBitmapImageConverter}}" Width="128" Height="128" />
+                                        <TextBlock Margin="0,20,0,0" Text="{Binding Title}" FontSize="20" TextAlignment="Center" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </DataTemplate>
                                 <DataTemplate DataType="{x:Type resultTypes:TextSearchResult}">
                                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                         <TextBlock Text="{Binding Text}" FontSize="20" TextAlignment="Center" TextWrapping="Wrap"/>

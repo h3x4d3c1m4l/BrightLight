@@ -66,6 +66,11 @@ namespace BrightLight.Shared.ViewModels
                 Process.Start(processStartInfo);
                 return true;
             }
+            if (result is ActionSearchResult actionResult)
+            {
+                actionResult.Action?.Invoke();
+                return true;
+            }
             return false;
         }
 

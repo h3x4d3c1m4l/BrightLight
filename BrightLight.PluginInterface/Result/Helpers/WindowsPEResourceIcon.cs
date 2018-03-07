@@ -5,11 +5,13 @@ using System.Text;
 
 namespace BrightLight.PluginInterface.Result.Helpers
 {
-    public class ExecutableIcon : IImage
+    public class WindowsPEResourceIcon : IImage
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string ExecutablePath { get; set; }
+        public string FilePath { get; set; }
+
+        public int Index { get; set; }
 
         public void Dispose()
         {

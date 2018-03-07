@@ -15,14 +15,14 @@ namespace BrightLight.WPF.UI.Converters
         // https://stackoverflow.com/questions/22499407/how-to-display-a-bitmap-in-a-wpf-image
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is ExecutableIcon)
+            if (value is WindowsPEResourceIcon)
             {
                 // extract icon van exe
-                var executableIcon = value as ExecutableIcon;
+                var executableIcon = value as WindowsPEResourceIcon;
                 try
                 {
-                    var extractor = new IconExtractor(executableIcon.ExecutablePath);
-                    var iconCollection = extractor.GetIcon(0);
+                    var extractor = new IconExtractor(executableIcon.FilePath);
+                    var iconCollection = extractor.GetIcon(executableIcon.Index);
                     var biggestIcon = IconUtil.Split(iconCollection).OrderByDescending(x => x.Width * x.Height).FirstOrDefault();
                     if (biggestIcon != null)
                         return CreateBitmapImageFromBitmap(biggestIcon.ToBitmap());

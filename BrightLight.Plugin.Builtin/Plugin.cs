@@ -23,7 +23,8 @@ namespace BrightLight.Plugin.Builtin
                 new MathProvider(),
                 new PathExecutablesProvider(),
                 new StartMenuProvider(),
-                new WikipediaProvider()
+                new WikipediaProvider(),
+                new ControlPanelProvider()
             };
         }
     }

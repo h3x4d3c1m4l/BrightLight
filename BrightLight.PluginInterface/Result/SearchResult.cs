@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace BrightLight.PluginInterface.Result
 {
-    public class SearchResult : INotifyPropertyChanged
+    public abstract class SearchResult : INotifyPropertyChanged
     {
         private IImage _icon;
 
