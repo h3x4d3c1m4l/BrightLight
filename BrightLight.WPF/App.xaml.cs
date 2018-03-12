@@ -24,11 +24,8 @@ namespace BrightLight.WPF
         {
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
-            try
-            {
-                _mutex = new Mutex(false, "h3x4d3c1m4l BrightLight");
-            }
-            catch
+            _mutex = new Mutex(false, $"h3x4d3c1m4l BrightLight - {Environment.UserName}", out bool createdNew);
+            if (!createdNew)
             {
                 // app already running
                 MessageBox.Show("BrightLight is already running!", "BrightLight - Already running", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -54,7 +51,14 @@ namespace BrightLight.WPF
         {
             GC.KeepAlive(_mutex); // don't GC our mutex
             var ex = (Exception)e.ExceptionObject;
-            // TODO: logging
+            var programData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            var logDir = Path.Combine(programData, "BrightLight", "log");
+            if (!Directory.Exists(logDir))
+                Directory.CreateDirectory(logDir);
+            var logfilePath = Path.Combine(logDir, $"UE-{DateTime.Now.ToString("yyyy_MM_dd-HH_mm_ss")}.log");
+            File.WriteAllText(logfilePath, ex.ToString());
+
+            MessageBox.Show($"A fatal error occured in BrightLight and the application will be closed. A log file has been written to disk to help the developers fix the issue.\r\n\r\n{logfilePath}", "BrightLight - Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -91,3 +95,4 @@ namespace BrightLight.WPF
         }
     }
 }
+
