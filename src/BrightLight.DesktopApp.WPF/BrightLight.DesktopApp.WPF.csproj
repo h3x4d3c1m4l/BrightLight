@@ -14,16 +14,18 @@
 
   <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.0.8" />
-	  <PackageReference Include="WpfMath" Version="0.6.0" />
+    <PackageReference Include="WpfMath" Version="0.6.0" />
+    <PackageReference Include="Microsoft.NETCore.Platforms" Version="3.0.0-preview4.19212.13" />
+    <PackageReference Include="Microsoft.Toolkit.Wpf.UI.Controls.WebView" Version="6.0.0-preview4.1" />
   </ItemGroup>
 
   <!-- because FontAwesome5's .NET Standard assemblies do not contain the WPF control -->
   <ItemGroup>
     <Reference Include="FontAwesome5">
-      <HintPath>..\BrightLight.DesktopApp.WPF.FrameworkHack\bin\Debug\FontAwesome5.dll</HintPath>
+      <HintPath>..\BrightLight.DesktopApp.WPF.FrameworkHack\bin\Debug\net472\FontAwesome5.dll</HintPath>
     </Reference>
     <Reference Include="FontAwesome5.WPF">
-      <HintPath>..\BrightLight.DesktopApp.WPF.FrameworkHack\bin\Debug\FontAwesome5.WPF.dll</HintPath>
+      <HintPath>..\BrightLight.DesktopApp.WPF.FrameworkHack\bin\Debug\net472\FontAwesome5.WPF.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -34,9 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="simple-icon.ico">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="simple-icon.ico" />
   </ItemGroup>
 
 </Project>

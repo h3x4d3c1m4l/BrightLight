@@ -7,9 +7,11 @@
         xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:controls="clr-namespace:WpfMath.Controls;assembly=WpfMath"
         xmlns:converters="clr-namespace:BrightLight.WPF.UI.Converters"
+        xmlns:ui="clr-namespace:BrightLight.WPF.UI"
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
         xmlns:resultTypes="clr-namespace:BrightLight.PluginInterface.Result;assembly=BrightLight.PluginInterface"
         xmlns:tb="http://www.hardcodet.net/taskbar"
+        xmlns:mstoolkit="clr-namespace:Microsoft.Toolkit.Wpf.UI.Controls;assembly=Microsoft.Toolkit.Wpf.UI.Controls.WebView"
         mc:Ignorable="d"
         Background="Transparent"
         Name="BrightLightMainWindow" Height="60" UseLayoutRounding="True"
@@ -194,13 +196,13 @@
                                 <DataTemplate DataType="{x:Type resultTypes:UrlSearchResult}">
                                     <Grid>
                                         <fa5:SvgAwesome Icon="Solid_Cog" Spin="True" Height="48" Width="48" />
-                                        <!--<wpf:ChromiumWebBrowser Address="{Binding Url}"/>-->
+                                        <mstoolkit:WebViewCompatible ui:WebViewHelper.Url="{Binding Url}" />
                                     </Grid>
                                 </DataTemplate>
                                 <DataTemplate DataType="{x:Type resultTypes:HtmlSearchResult}">
                                     <Grid>
                                         <fa5:SvgAwesome Icon="Solid_Cog" Spin="True" Height="48" Width="48" />
-                                        <!--<wpf:ChromiumWebBrowser IsBrowserInitializedChanged="HtmlRendererInitialized"/>-->
+                                        <mstoolkit:WebViewCompatible ui:WebViewHelper.Body="{Binding Html}" />
                                     </Grid>
                                 </DataTemplate>
                                 <DataTemplate DataType="{x:Type resultTypes:MathSearchResult}">
@@ -219,11 +221,3 @@
         </Grid>
     </Border>
 </Window>
-
-    
-
-    
-
-    
-
-    

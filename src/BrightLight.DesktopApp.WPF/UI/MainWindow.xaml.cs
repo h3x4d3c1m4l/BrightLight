@@ -44,13 +44,15 @@ namespace BrightLight.WPF.UI
             InitializeComponent();
             Global.MainViewModel.PropertyChanged += (sender, args) =>
             {
-                if (args.PropertyName != nameof(MainViewModel.QueryNotEmpty)) return;
-                Storyboard sb;
-                if (Global.MainViewModel.QueryNotEmpty)
-                    sb = FindResource("ShowResultsAnimation") as Storyboard;
-                else
-                    sb = FindResource("HideResultsAnimation") as Storyboard;
-                sb.Begin();
+                if (args.PropertyName == nameof(MainViewModel.QueryNotEmpty))
+                {
+                    Storyboard sb;
+                    if (Global.MainViewModel.QueryNotEmpty)
+                        sb = FindResource("ShowResultsAnimation") as Storyboard;
+                    else
+                        sb = FindResource("HideResultsAnimation") as Storyboard;
+                    sb.Begin();
+                }
             };
             Global.MainWindow = this;
         }
