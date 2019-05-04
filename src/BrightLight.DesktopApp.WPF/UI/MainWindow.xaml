@@ -4,11 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BrightLight.WPF"
-        xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:controls="clr-namespace:WpfMath.Controls;assembly=WpfMath"
         xmlns:converters="clr-namespace:BrightLight.WPF.UI.Converters"
-        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:fa5="http://schemas.fontawesome.com/icons/"
         xmlns:resultTypes="clr-namespace:BrightLight.PluginInterface.Result;assembly=BrightLight.PluginInterface"
         xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
@@ -21,9 +20,9 @@
         </Style>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <converters:BoolToInvertedVisibilityConverter x:Key="BoolToInvertedVisibilityConverter"/>
-        <converters:FontAwesomeIdToFontAwesomeIconConverter x:Key="FontAwesomeIdToFontAwesomeIconConverter"/>
         <converters:BitmapToBitmapImageConverter x:Key="BitmapToBitmapImageConverter"/>
         <converters:ResultCountToVisibilityConverter x:Key="ResultCountToVisibilityConverter"/>
+        <converters:FontAwesomeLabelToFontAwesomeIconConverter x:Key="FontAwesomeLabelToFontAwesomeIconConverter"/>
         <Storyboard x:Key="ShowResultsAnimation" Timeline.DesiredFrameRate="60">
             <DoubleAnimation Storyboard.Target="{x:Reference Name=BrightLightMainWindow}" Storyboard.TargetProperty="Height" To="500" Duration="0:0:.1" />
             <DoubleAnimation Storyboard.Target="{x:Reference Name=BrightLightMainWindow}" Storyboard.TargetProperty="Top" To="{Binding ElementName=BrightLightMainWindow, Path=TopWhenResults}" Duration="0:0:.1" />
@@ -51,18 +50,18 @@
                     <ContextMenu>
                         <MenuItem Header="Open search" Click="OpenSearchClick">
                             <MenuItem.Icon>
-                                <fa:ImageAwesome Icon="Search" HorizontalAlignment="Center" />
+                                <fa5:SvgAwesome Icon="Solid_Search" HorizontalAlignment="Center" />
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="Settings" Click="OpenSettingsClick">
                             <MenuItem.Icon>
-                                <fa:ImageAwesome Icon="Cogs" HorizontalAlignment="Center" />
+                                <fa5:SvgAwesome Icon="Solid_Cogs" HorizontalAlignment="Center" />
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator/>
                         <MenuItem Header="Exit" Click="ExitClick">
                             <MenuItem.Icon>
-                                <fa:ImageAwesome Icon="SignOut" HorizontalAlignment="Center" />
+                                <fa5:SvgAwesome Icon="Solid_SignOutAlt" HorizontalAlignment="Center" />
                             </MenuItem.Icon>
                         </MenuItem>
                     </ContextMenu>
@@ -75,8 +74,8 @@
                         <ColumnDefinition Width="60"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <fa:ImageAwesome Grid.Column="0" Margin="15,0,0,0" Height="40" Width="40" Icon="Search" Visibility="{Binding Searching, Converter={StaticResource BoolToVisibilityConverter}}" />
-                    <fa:ImageAwesome Grid.Column="0" Margin="15,0,0,0" Height="40" Width="40" Icon="Cog" Spin="True" Visibility="{Binding Searching, Converter={StaticResource BoolToInvertedVisibilityConverter}}" />
+                    <fa5:SvgAwesome Grid.Column="0" Margin="15,0,0,0" Height="40" Width="40" Icon="Solid_Search" Visibility="{Binding Searching, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    <fa5:SvgAwesome Grid.Column="0" Margin="15,0,0,0" Height="40" Width="40" Icon="Solid_Cog" Spin="True" Visibility="{Binding Searching, Converter={StaticResource BoolToInvertedVisibilityConverter}}" />
                     <TextBox Grid.Column="1" VerticalAlignment="Center" Foreground="Black" x:Name="SearchTermTextBox" Height="60" Padding="10,0,0,0" VerticalContentAlignment="Center" FontSize="25" Background="Transparent" BorderThickness="0" Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Grid.Column="1" IsHitTestVisible="False" Text="BrightLight Search ..." VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="#888888" FontSize="25">
                         <TextBlock.Style>
@@ -118,7 +117,7 @@
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <Image Grid.Column="0" Source="{Binding Icon, Converter={StaticResource BitmapToBitmapImageConverter}}" Width="16" Height="16" Margin="10,0,0,0" />
-                                            <fa:ImageAwesome Foreground="White" Grid.Column="0" VerticalAlignment="Center" Height="16" Width="16" Margin="10,0,0,0" Icon="{Binding FontAwesomeIcon, Converter={StaticResource FontAwesomeIdToFontAwesomeIconConverter}}" />
+                                            <fa5:SvgAwesome Foreground="White" Grid.Column="0" VerticalAlignment="Center" Height="16" Width="16" Margin="10,0,0,0" Icon="{Binding FontAwesomeIcon, Converter={StaticResource FontAwesomeLabelToFontAwesomeIconConverter}}" />
                                             <TextBlock Foreground="White" Grid.Column="1" Text="{Binding Title}" TextTrimming="CharacterEllipsis" Margin="10"/>
                                         </Grid>
                                         <!-- Result set RESULTS -->
@@ -140,7 +139,7 @@
                                                             <ColumnDefinition Width="*"/>
                                                         </Grid.ColumnDefinitions>
                                                         <Image Grid.Column="0" Source="{Binding Icon, Converter={StaticResource BitmapToBitmapImageConverter}}" Width="16" Height="16" />
-                                                        <fa:ImageAwesome Grid.Column="0" VerticalAlignment="Center" Height="16" Width="16" Icon="{Binding FontAwesomeIcon, Converter={StaticResource FontAwesomeIdToFontAwesomeIconConverter}}" />
+                                                        <fa5:SvgAwesome Grid.Column="0" VerticalAlignment="Center" Height="16" Width="16" Icon="{Binding FontAwesomeIcon, Converter={StaticResource FontAwesomeLabelToFontAwesomeIconConverter}}" />
                                                         <TextBlock Grid.Column="1" Text="{Binding Title}" TextTrimming="CharacterEllipsis" Margin="5"/>
                                                     </Grid>
                                                 </DataTemplate>
@@ -194,14 +193,14 @@
                                 </DataTemplate>
                                 <DataTemplate DataType="{x:Type resultTypes:UrlSearchResult}">
                                     <Grid>
-                                        <fa:ImageAwesome Icon="Cog" Spin="True" Height="48" Width="48" />
-                                        <wpf:ChromiumWebBrowser Address="{Binding Url}"/>
+                                        <fa5:SvgAwesome Icon="Solid_Cog" Spin="True" Height="48" Width="48" />
+                                        <!--<wpf:ChromiumWebBrowser Address="{Binding Url}"/>-->
                                     </Grid>
                                 </DataTemplate>
                                 <DataTemplate DataType="{x:Type resultTypes:HtmlSearchResult}">
                                     <Grid>
-                                        <fa:ImageAwesome Icon="Cog" Spin="True" Height="48" Width="48" />
-                                        <wpf:ChromiumWebBrowser IsBrowserInitializedChanged="HtmlRendererInitialized"/>
+                                        <fa5:SvgAwesome Icon="Solid_Cog" Spin="True" Height="48" Width="48" />
+                                        <!--<wpf:ChromiumWebBrowser IsBrowserInitializedChanged="HtmlRendererInitialized"/>-->
                                     </Grid>
                                 </DataTemplate>
                                 <DataTemplate DataType="{x:Type resultTypes:MathSearchResult}">

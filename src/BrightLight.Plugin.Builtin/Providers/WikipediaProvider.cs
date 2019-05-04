@@ -39,7 +39,7 @@ namespace BrightLight.Plugin.Builtin.Providers
             var resultObj = new SearchResultCollection
             {
                 Title = "Wikipedia",
-                FontAwesomeIcon = "wikipedia-w"
+                FontAwesomeIcon = "Wikipedia W"
             };
             resultObj.Results = new ObservableCollection<SearchResult>(result.Query.Search.Select(x => new UrlSearchResult
             {

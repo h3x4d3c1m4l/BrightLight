@@ -20,8 +20,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BrightLight.Shared.ViewModels;
 using BrightLight.PluginInterface.Result;
-using CefSharp;
-using CefSharp.Wpf;
 using Image = System.Windows.Controls.Image;
 using System.Windows.Forms;
 using ListView = System.Windows.Controls.ListView;
@@ -84,16 +82,16 @@ namespace BrightLight.WPF.UI
             SearchTermTextBox.Focus();
         }
 
-        private void HtmlRendererInitialized(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (Global.MainViewModel.SelectedSearchResult is HtmlSearchResult htmlResult)
-            {
-                var html = htmlResult.Html;
-                var browser = (ChromiumWebBrowser) sender;
+        //private void HtmlRendererInitialized(object sender, DependencyPropertyChangedEventArgs e)
+        //{
+        //    if (Global.MainViewModel.SelectedSearchResult is HtmlSearchResult htmlResult)
+        //    {
+        //        var html = htmlResult.Html;
+        //        var browser = (ChromiumWebBrowser) sender;
 
-                browser.LoadHtml(html);
-            }
-        }
+        //        browser.LoadHtml(html);
+        //    }
+        //}
 
         private void KeyboardKeyDown(object sender, KeyEventArgs e)
         {

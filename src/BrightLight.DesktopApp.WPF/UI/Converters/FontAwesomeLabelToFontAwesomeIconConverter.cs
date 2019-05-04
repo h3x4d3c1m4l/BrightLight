@@ -4,13 +4,14 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
-using FontAwesome.WPF;
+using FontAwesome5;
+using FontAwesome5.WPF;
 
 namespace BrightLight.WPF.UI.Converters
 {
-    class FontAwesomeIdToFontAwesomeIconConverter : IValueConverter
+    class FontAwesomeLabelToFontAwesomeIconConverter : IValueConverter
     {
-        public static Dictionary<string, FontAwesomeIcon> faDict;
+        public static Dictionary<string, EFontAwesomeIcon> faDict;
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -31,19 +32,19 @@ namespace BrightLight.WPF.UI.Converters
 
         private static void buildFontAwesomeDictionary()
         {
-            var type = typeof(FontAwesomeIcon);
+            var type = typeof(EFontAwesomeIcon);
             var enumValues = Enum.GetValues(type);
 
-            faDict = new Dictionary<string, FontAwesomeIcon>();
+            faDict = new Dictionary<string, EFontAwesomeIcon>();
             foreach (var e in enumValues)
             {
-                if ((FontAwesomeIcon)e == FontAwesomeIcon.None) continue;
+                if ((EFontAwesomeIcon)e == EFontAwesomeIcon.None) continue;
                 var memInfo = type.GetMember(e.ToString());
-                var attributes = memInfo[0].GetCustomAttributes(typeof(IconIdAttribute), false);
+                var attributes = memInfo[0].GetCustomAttributes(typeof(FontAwesomeInformationAttribute), false);
                 if (!attributes.Any()) continue;
-                var id = ((IconIdAttribute)attributes[0]).Id;
+                var id = ((FontAwesomeInformationAttribute)attributes[0]).Label;
                 if (!faDict.Keys.Contains(id))
-                    faDict.Add(id, (FontAwesomeIcon) e);
+                    faDict.Add(id, (EFontAwesomeIcon) e);
             }
         }
     }

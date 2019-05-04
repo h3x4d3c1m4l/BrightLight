@@ -1,6 +1,6 @@
 bin/
 obj/
-packages
+packages/
 *.userprefs
 *.user
 *.bak

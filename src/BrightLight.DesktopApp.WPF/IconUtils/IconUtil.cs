@@ -47,7 +47,7 @@ namespace BrightLight.WPF.IconUtils
             var dm = new DynamicMethod(
                 "GetIconData", typeof(byte[]), new Type[] { typeof(Icon) }, typeof(Icon));
             var fi = typeof(Icon).GetField(
-                "iconData", BindingFlags.Instance | BindingFlags.NonPublic);
+                "_iconData", BindingFlags.Instance | BindingFlags.NonPublic);
             var gen = dm.GetILGenerator();
             gen.Emit(OpCodes.Ldarg_0);
             gen.Emit(OpCodes.Ldfld, fi);

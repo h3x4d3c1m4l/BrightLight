@@ -132,7 +132,7 @@ namespace BrightLight.Plugin.Builtin.Providers
             {
                 Title = "Run",
                 Relevance = SearchResultRelevance.ONTOP,
-                FontAwesomeIcon = "window-maximize"
+                FontAwesomeIcon = "Window Maximize"
             };
             results.Results = new ObservableCollection<SearchResult>
             {

@@ -75,7 +75,7 @@ namespace BrightLight.Plugin.Builtin.Providers
             {
                 Title = "Start Menu",
                 Relevance = SearchResultRelevance.ONTOP,
-                FontAwesomeIcon = "bars"
+                FontAwesomeIcon = "Bars"
             };
             results.Results = new ObservableCollection<SearchResult>();
             foreach (var f in files)

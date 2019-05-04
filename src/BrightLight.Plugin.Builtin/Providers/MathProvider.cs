@@ -51,7 +51,7 @@ namespace BrightLight.Plugin.Builtin.Providers
             {
                 Title = "Math evaluation",
                 Relevance = evaluated != null ? SearchResultRelevance.ONTOP : SearchResultRelevance.DEFAULT,
-                FontAwesomeIcon = "calculator"
+                FontAwesomeIcon = "Calculator"
             };
             results.Results = new ObservableCollection<SearchResult>
             {
