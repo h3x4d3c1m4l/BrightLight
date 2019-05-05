@@ -171,7 +171,8 @@ namespace BrightLight.Shared.ViewModels
             // http://codesnippets.fesslersoft.de/get-all-types-that-implement-a-specific-interface/
             var pluginAssemblies = new List<Assembly>
             {
-                Assembly.Load("BrightLight.Plugin.Builtin")
+                Assembly.Load("BrightLight.Plugin.Builtin"),
+                Assembly.Load("BrightLight.Plugin.DevTools")
                 // TODO: load other plugins
             };
 

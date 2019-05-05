@@ -12,4 +12,9 @@ namespace BrightLight.PluginInterface
     {
         Task<SearchResultCollection> SearchAsync(SearchQuery query, CancellationToken ct);
     }
+
+    public interface ISearchProvider<T> : ISearchProvider
+    {
+        T Settings { get; set; }
+    }
 }

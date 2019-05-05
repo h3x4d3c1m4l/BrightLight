@@ -17,4 +17,9 @@ namespace BrightLight.PluginInterface
 
         IReadOnlyCollection<ISearchProvider> Init(IRunOnUiThreadHelper runOnUiThreadHelper);
     }
+
+    public interface IPlugin<T> : IPlugin
+    {
+        T Settings { get; set; }
+    }
 }
