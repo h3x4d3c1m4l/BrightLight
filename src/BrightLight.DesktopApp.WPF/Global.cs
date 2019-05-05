@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BrightLight.WPF.UI;
+using BrightLight.DesktopApp.WPF.UI.Windows;
 using BrightLight.Shared.ViewModels;
 
-namespace BrightLight.WPF
+namespace BrightLight.DesktopApp.WPF
 {
     public static class Global
     {

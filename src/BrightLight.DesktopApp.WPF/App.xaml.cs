@@ -1,15 +1,12 @@
-﻿using System;
-using System.Diagnostics;
+using System;
 using System.IO;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using BrightLight.Shared.ViewModels;
-using BrightLight.WPF.UI;
+using BrightLight.DesktopApp.WPF.UI.Windows;
 
-namespace BrightLight.WPF
+namespace BrightLight.DesktopApp.WPF
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -31,6 +28,8 @@ namespace BrightLight.WPF
                 MessageBox.Show("BrightLight is already running!", "BrightLight - Already running", MessageBoxButton.OK, MessageBoxImage.Information);
                 Environment.Exit(0);
             }
+
+            InitializeComponent();
 
             Global.MainViewModel = new MainViewModel(new RunOnWpfUiThread());
             MainWindow = Global.MainWindow = new MainWindow();

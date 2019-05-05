@@ -5,12 +5,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon />
-    <StartupObject />
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="simple-icon.ico" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.0.8" />
@@ -37,6 +32,9 @@
 
   <ItemGroup>
     <Resource Include="simple-icon.ico" />
+    <Resource Include="UI\Resources\Converters.xaml" />
+    <Resource Include="UI\Resources\DataTemplates.xaml" />
+    <Resource Include="UI\Resources\ScrollBarStyling.xaml" />
   </ItemGroup>
 
 </Project>

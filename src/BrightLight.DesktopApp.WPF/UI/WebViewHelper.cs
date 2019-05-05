@@ -1,10 +1,10 @@
-﻿using Microsoft.Toolkit.Wpf.UI.Controls;
+using Microsoft.Toolkit.Wpf.UI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 
-namespace BrightLight.WPF.UI
+namespace BrightLight.DesktopApp.WPF.UI
 {
     /// <summary>
     /// Helper class for Microsoft.Toolkit.Wpf.UI.Controls.WebViewCompatible.

@@ -1,5 +1,5 @@
-﻿using BrightLight.PluginInterface.Result.Helpers;
-using BrightLight.WPF.IconUtils;
+using BrightLight.PluginInterface.Result.Helpers;
+using BrightLight.DesktopApp.WPF.IconUtils;
 using System;
 using System.Drawing;
 using System.Globalization;
@@ -8,9 +8,9 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace BrightLight.WPF.UI.Converters
+namespace BrightLight.DesktopApp.WPF.UI.Converters
 {
-    class BitmapToBitmapImageConverter : IValueConverter
+    public class BitmapToBitmapImageConverter : IValueConverter
     {
         // https://stackoverflow.com/questions/22499407/how-to-display-a-bitmap-in-a-wpf-image
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

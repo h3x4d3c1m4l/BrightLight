@@ -17,7 +17,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrightLight.Shared", "Brigh
 		{499D79E5-CF97-4AF5-827E-8570FFDBCFE8} = {499D79E5-CF97-4AF5-827E-8570FFDBCFE8}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightLight.DesktopApp.WPF.FrameworkHack", "BrightLight.DesktopApp.WPF.FrameworkHack\BrightLight.DesktopApp.WPF.FrameworkHack.csproj", "{AF174EA3-DF3E-4A89-B967-80EEB710193B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrightLight.DesktopApp.WPF.FrameworkHack", "BrightLight.DesktopApp.WPF.FrameworkHack\BrightLight.DesktopApp.WPF.FrameworkHack.csproj", "{AF174EA3-DF3E-4A89-B967-80EEB710193B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightLight.Plugin.DevTools", "BrightLight.Plugin.DevTools\BrightLight.Plugin.DevTools.csproj", "{BE613EE9-211E-44AE-B416-549674FC0DAF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{499D79E5-CF97-4AF5-827E-8570FFDBCFE8} = {499D79E5-CF97-4AF5-827E-8570FFDBCFE8}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +50,10 @@ Global
 		{AF174EA3-DF3E-4A89-B967-80EEB710193B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF174EA3-DF3E-4A89-B967-80EEB710193B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF174EA3-DF3E-4A89-B967-80EEB710193B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE613EE9-211E-44AE-B416-549674FC0DAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE613EE9-211E-44AE-B416-549674FC0DAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE613EE9-211E-44AE-B416-549674FC0DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE613EE9-211E-44AE-B416-549674FC0DAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

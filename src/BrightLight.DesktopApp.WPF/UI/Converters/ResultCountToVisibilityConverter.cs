@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
@@ -10,9 +10,9 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace BrightLight.WPF.UI.Converters
+namespace BrightLight.DesktopApp.WPF.UI.Converters
 {
-    class ResultCountToVisibilityConverter : IValueConverter
+    public class ResultCountToVisibilityConverter : IValueConverter
     {
         // https://stackoverflow.com/questions/22499407/how-to-display-a-bitmap-in-a-wpf-image
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

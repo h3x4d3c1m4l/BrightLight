@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using BrightLight.PluginInterface;
 
-namespace BrightLight.WPF
+namespace BrightLight.DesktopApp.WPF
 {
     class RunOnWpfUiThread : IRunOnUiThreadHelper
     {

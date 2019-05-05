@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -7,9 +7,9 @@ using System.Windows.Data;
 using FontAwesome5;
 using FontAwesome5.WPF;
 
-namespace BrightLight.WPF.UI.Converters
+namespace BrightLight.DesktopApp.WPF.UI.Converters
 {
-    class FontAwesomeLabelToFontAwesomeIconConverter : IValueConverter
+    public class FontAwesomeLabelToFontAwesomeIconConverter : IValueConverter
     {
         public static Dictionary<string, EFontAwesomeIcon> faDict;
 

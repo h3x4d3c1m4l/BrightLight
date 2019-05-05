@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  IconExtractor/IconUtil for .NET
  *  Copyright (C) 2014 Tsuda Kageyu. All rights reserved.
  *
@@ -34,7 +34,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Media.Imaging;
 
-namespace BrightLight.WPF.IconUtils
+namespace BrightLight.DesktopApp.WPF.IconUtils
 {
     public class IconExtractor
     {
