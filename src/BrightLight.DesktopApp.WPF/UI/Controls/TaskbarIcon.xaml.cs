@@ -25,18 +25,18 @@ namespace BrightLight.DesktopApp.WPF.UI.Controls
         
         private void OpenSearchClick(object sender, RoutedEventArgs e)
         {
-            Global.MainWindow.ShowMe();
+            //Global.MainWindow.ShowMe();
         }
 
         private void ExitClick(object sender, RoutedEventArgs e)
         {
-            Global.MainViewModel.PrepareApplicationExit();
-            Global.MainWindow.Close();
+            //Global.MainViewModel.PrepareApplicationExit();
+            //Global.MainWindow.Close();
         }
 
         private void OpenSettingsClick(object sender, RoutedEventArgs e)
         {
-            Global.SettingsWindow.Show();
+            //Global.SettingsWindow.Show();
         }
     }
 }

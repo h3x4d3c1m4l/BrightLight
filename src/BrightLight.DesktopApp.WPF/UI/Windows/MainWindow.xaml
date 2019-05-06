@@ -5,12 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BrightLight.DesktopApp.WPF"
         xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-        xmlns:c="clr-namespace:BrightLight.DesktopApp.WPF.UI.Controls"
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
         Background="Transparent"
         Name="BrightLightMainWindow" Height="60" UseLayoutRounding="True"
-        Title="MainWindow" Width="750" Topmost="True" WindowStyle="None" AllowsTransparency="True" DataContext="{x:Static local:Global.MainViewModel}" Loaded="WindowLoaded" KeyDown="KeyboardKeyDown" ShowInTaskbar="False">
+        Title="MainWindow" Width="750" Topmost="True" WindowStyle="None" AllowsTransparency="True" Loaded="WindowLoaded" KeyDown="KeyboardKeyDown" ShowInTaskbar="False">
     <Window.Resources>
         <Style TargetType="{x:Type Border}">
             <Setter Property="CornerRadius" Value="15"/>
@@ -36,15 +35,14 @@
 
     <Border CornerRadius="15,15,15,15" Background="#AAFFFFFF" x:Name="Border" Height="60" BorderBrush="Black" BorderThickness="1">
         <Grid>
-            <c:TaskbarIcon/>
             <DockPanel>
                 <Grid DockPanel.Dock="Top" Height="60">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <fa5:SvgAwesome Grid.Column="0" Margin="15,0,0,0" Height="40" Width="40" Icon="Solid_Search" Visibility="{Binding Searching, Converter={StaticResource BoolToVisibilityConverter}}" />
-                    <fa5:SvgAwesome Grid.Column="0" Margin="15,0,0,0" Height="40" Width="40" Icon="Solid_Cog" Spin="True" Visibility="{Binding Searching, Converter={StaticResource BoolToInvertedVisibilityConverter}}" />
+                    <fa5:SvgAwesome Grid.Column="0" Margin="15,0,0,0" Height="30" Width="30" Icon="Solid_Search" Visibility="{Binding Searching, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    <fa5:SvgAwesome Grid.Column="0" Margin="15,0,0,0" Height="30" Width="30" Icon="Solid_Cog" Spin="True" Visibility="{Binding Searching, Converter={StaticResource BoolToInvertedVisibilityConverter}}" />
                     <TextBox Grid.Column="1" VerticalAlignment="Center" Foreground="Black" x:Name="SearchTermTextBox" Height="60" Padding="10,0,0,0" VerticalContentAlignment="Center" FontSize="25" Background="Transparent" BorderThickness="0" Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Grid.Column="1" IsHitTestVisible="False" Text="BrightLight Search ..." VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="#888888" FontSize="25">
                         <TextBlock.Style>

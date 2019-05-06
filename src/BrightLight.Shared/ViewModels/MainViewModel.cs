@@ -18,28 +18,37 @@ namespace BrightLight.Shared.ViewModels
     {
         private IRunOnUiThreadHelper _runOnUiThreadHelper;
 
-        private string query;
+        private string _query;
 
         public string Query
         {
-            get => query;
+            get => _query;
             set
             {
-                if (query == value) return;
-                query = value;
-                if (_searchCancellationTokenSource != null && !_searchCancellationTokenSource.IsCancellationRequested)
-                    _searchCancellationTokenSource.Cancel();
+                if (_query == value) return;
+                _query = value;
                 _runOnUiThreadHelper.RunOnUIThread(() =>
                 {
-                    // clear the search results
-                    SearchResultCollections.Clear();
-                    SelectedSearchResult = null;
-                    Searching = false;
+                    ResetAllButQuery();
                 });
                 OnPropertyChanged();
-                // ReSharper disable once ExplicitCallerInfoArgument
-                OnPropertyChanged(nameof(QueryNotEmpty));
+                OnPropertyChanged(nameof(MayQuery));
             }
+        }
+
+        public void Reset()
+        {
+            Query = string.Empty;
+            ResetAllButQuery();
+        }
+
+        private void ResetAllButQuery()
+        {
+            if (_searchCancellationTokenSource != null && !_searchCancellationTokenSource.IsCancellationRequested)
+                _searchCancellationTokenSource.Cancel();
+            SearchResultCollections.Clear();
+            SelectedSearchResult = null;
+            Searching = false;
         }
 
         private readonly List<ISearchProvider> searchProviders;
@@ -89,7 +98,7 @@ namespace BrightLight.Shared.ViewModels
 
         private void StartQuerying(string queryString)
         {
-            var q = queryString ?? query;
+            var q = queryString ?? _query;
             if (string.IsNullOrWhiteSpace(q)) return;
             _runOnUiThreadHelper.RunOnUIThread(() =>
             {
@@ -146,14 +155,7 @@ namespace BrightLight.Shared.ViewModels
             }
         }
 
-        public bool QueryNotEmpty
-        {
-            get
-            {
-                var x = !string.IsNullOrWhiteSpace(Query);
-                return x;
-            }
-        }
+        public bool MayQuery => !string.IsNullOrWhiteSpace(Query) && Query.Length > 1;
 
         public MainViewModel(IRunOnUiThreadHelper runOnUiThreadHelper)
         {
@@ -162,7 +164,7 @@ namespace BrightLight.Shared.ViewModels
 
             // throttle Query change
             Observable.FromEventPattern<PropertyChangedEventArgs>(this, "PropertyChanged")
-                      .Where(x => x.EventArgs.PropertyName == "Query")
+                      .Where(x => x.EventArgs.PropertyName == nameof(Query))
                       .Select(_ => Query)
                       .Throttle(TimeSpan.FromMilliseconds(500))
                       .Subscribe(StartQuerying);
@@ -172,7 +174,7 @@ namespace BrightLight.Shared.ViewModels
             var pluginAssemblies = new List<Assembly>
             {
                 Assembly.Load("BrightLight.Plugin.Builtin"),
-                Assembly.Load("BrightLight.Plugin.DevTools")
+                //Assembly.Load("BrightLight.Plugin.DevTools")
                 // TODO: load other plugins
             };
 

@@ -5,6 +5,10 @@ using System.Windows;
 using System.Windows.Input;
 using BrightLight.Shared.ViewModels;
 using BrightLight.DesktopApp.WPF.UI.Windows;
+using Autofac;
+using BrightLight.PluginInterface;
+using Autofac.Core;
+using BrightLight.DesktopApp.WPF.UI.Controls;
 
 namespace BrightLight.DesktopApp.WPF
 {
@@ -16,6 +20,8 @@ namespace BrightLight.DesktopApp.WPF
         private HotKey _showHotKey; // TODO: config window to make this a custom set hotkey
 
         private Mutex _mutex;
+
+        private static IContainer Container;
 
         private App()
         {
@@ -31,13 +37,20 @@ namespace BrightLight.DesktopApp.WPF
 
             InitializeComponent();
 
-            Global.MainViewModel = new MainViewModel(new RunOnWpfUiThread());
-            MainWindow = Global.MainWindow = new MainWindow();
-            Global.SettingsWindow = new SettingsWindow();
+            var builder = new ContainerBuilder();
+            builder.RegisterInstance(Dispatcher);
+            builder.RegisterType<RunUsingWpfDispatcherHelper>().As<IRunOnUiThreadHelper>().SingleInstance();
+            builder.RegisterType<MainViewModel>().SingleInstance();
+            builder.RegisterType<SettingsViewModel>().SingleInstance();
+            builder.RegisterType<MainWindow>().AutoActivate().SingleInstance();
+            builder.RegisterType<SettingsWindow>().SingleInstance();
+            builder.RegisterType<TaskbarIcon>().AutoActivate().SingleInstance();
+            Container = builder.Build();
+
             _showHotKey = new HotKey(Key.Space, KeyModifier.Alt, key =>
             {
-                Global.MainViewModel.Query = string.Empty;
-                Global.MainWindow.ShowMe();
+                Container.Resolve<MainViewModel>().Reset();
+                Container.Resolve<MainWindow>().Show();
             });
         }
 

@@ -12,6 +12,7 @@
     <PackageReference Include="WpfMath" Version="0.6.0" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="3.0.0-preview4.19212.13" />
     <PackageReference Include="Microsoft.Toolkit.Wpf.UI.Controls.WebView" Version="6.0.0-preview4.1" />
+    <PackageReference Include="Autofac" Version="4.9.2" />
   </ItemGroup>
 
   <!-- because FontAwesome5's .NET Standard assemblies do not contain the WPF control -->
@@ -35,6 +36,10 @@
     <Resource Include="UI\Resources\Converters.xaml" />
     <Resource Include="UI\Resources\DataTemplates.xaml" />
     <Resource Include="UI\Resources\ScrollBarStyling.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UI\Controls\" />
   </ItemGroup>
 
 </Project>

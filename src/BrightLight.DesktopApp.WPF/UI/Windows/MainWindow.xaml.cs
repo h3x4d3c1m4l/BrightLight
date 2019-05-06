@@ -24,6 +24,7 @@ using Image = System.Windows.Controls.Image;
 using System.Windows.Forms;
 using ListView = System.Windows.Controls.ListView;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
+using BrightLight.DesktopApp.WPF.UI.Controls;
 
 namespace BrightLight.DesktopApp.WPF.UI.Windows
 {
@@ -38,23 +39,26 @@ namespace BrightLight.DesktopApp.WPF.UI.Windows
 
         public int TopWhenResults { get; set; }
 
-        public MainWindow()
+        private MainViewModel _vm;
+
+        public MainWindow(MainViewModel vm)
         {
+            _vm = vm;
+            DataContext = _vm;
             _windowInteropHelper = new WindowInteropHelper(this);
             InitializeComponent();
-            Global.MainViewModel.PropertyChanged += (sender, args) =>
+            _vm.PropertyChanged += (sender, args) =>
             {
-                if (args.PropertyName == nameof(MainViewModel.QueryNotEmpty))
+                if (args.PropertyName == nameof(MainViewModel.MayQuery))
                 {
                     Storyboard sb;
-                    if (Global.MainViewModel.QueryNotEmpty)
+                    if (_vm.MayQuery)
                         sb = FindResource("ShowResultsAnimation") as Storyboard;
                     else
                         sb = FindResource("HideResultsAnimation") as Storyboard;
                     sb.Begin();
                 }
             };
-            Global.MainWindow = this;
         }
 
         internal void EnableBlur()
@@ -99,24 +103,22 @@ namespace BrightLight.DesktopApp.WPF.UI.Windows
         {
             if (e.Key == Key.Enter)
             {
-                var somethingAsHappened = Global.MainViewModel.ExecuteActionFromSearchResult();
+                var somethingAsHappened = _vm.ExecuteActionFromSearchResult();
                 if (somethingAsHappened)
-                    HideMe();
+                    Hide();
                 e.Handled = true;
             }
             if (e.Key == Key.Escape)
             {
-                HideMe();
+                Hide();
             }
         }
         
-        public void ShowMe()
+        public new void Show()
         {
             moveApplicationToCenterOfCurrentScreen();
-
-            // detect on which
-            Show();
             (FindResource("ShowMe") as Storyboard).Begin(Border);
+            ((Window)this).Show();
             Activate();
             SearchTermTextBox.Focus();
         }
@@ -139,15 +141,15 @@ namespace BrightLight.DesktopApp.WPF.UI.Windows
             Top = TopWhenNoResults;
         }
 
-        private void HideMe()
+        private new void Hide()
         {
             (FindResource("HideMe") as Storyboard).Begin(Border);
         }
 
         private void HideMeCompleted(object sender, EventArgs e)
         {
-            Hide();
-            Global.MainViewModel.Query = string.Empty;
+            ((Window)this).Hide();
+            _vm.Reset();
         }
 
         private void ResultListViewOnLostFocus(object sender, RoutedEventArgs e)
