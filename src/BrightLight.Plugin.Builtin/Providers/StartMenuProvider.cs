@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BrightLight.Plugin.Builtin;
+using BrightLight.Plugin.Builtin.Localization;
 using BrightLight.PluginInterface;
 using BrightLight.PluginInterface.Result;
 using BrightLight.PluginInterface.Result.Helpers;
@@ -19,6 +20,10 @@ namespace BrightLight.Plugin.Builtin.Providers
         private string _currentUserStartMenuPath;
 
         private dynamic _wscriptShell;
+
+        public string Name => Resources.ProviderStartMenuName;
+
+        public string Description => Resources.ProviderStartMenuDescription;
 
         public StartMenuProvider()
         {

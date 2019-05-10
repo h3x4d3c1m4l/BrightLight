@@ -6,12 +6,17 @@ using System.Threading;
 using MathNet.Symbolics;
 using BrightLight.PluginInterface.Result;
 using BrightLight.PluginInterface;
+using BrightLight.Plugin.Builtin.Localization;
 
 namespace BrightLight.Plugin.Builtin.Providers
 {
     // TODO: https://github.com/mathnet/mathnet-symbolics/issues/55
     public class MathProvider : ISearchProvider
     {
+        public string Name => Resources.ProviderMathName;
+
+        public string Description => Resources.ProviderMathDescription;
+
         public void Dispose()
         {
         }

@@ -3,6 +3,7 @@ using BrightLight.Plugin.Builtin.Providers;
 using BrightLight.PluginInterface;
 using System;
 using System.Collections.Generic;
+using BrightLight.Plugin.Builtin.Localization;
 
 namespace BrightLight.Plugin.Builtin
 {
@@ -10,22 +11,11 @@ namespace BrightLight.Plugin.Builtin
     {
         public static IRunOnUiThreadHelper RunOnUiThreadHelper;
 
-        public string Name => "Builtin";
+        public string Name => Resources.PluginName;
         public string VersionName => "";
         public string Author => "Sander \"h3x4d3c1m4l\" in 't Hout";
         public IImage Logo => null;
-
-        public IReadOnlyCollection<ISearchProvider> Init(IRunOnUiThreadHelper runOnUiThreadHelper)
-        {
-            RunOnUiThreadHelper = runOnUiThreadHelper;
-            return new List<ISearchProvider>
-            {
-                new MathProvider(),
-                new PathExecutablesProvider(),
-                new StartMenuProvider(),
-                new WikipediaProvider(),
-                new ControlPanelProvider()
-            };
-        }
+        public string Description => throw new NotImplementedException();
+        public string Website => throw new NotImplementedException();
     }
 }

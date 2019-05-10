@@ -8,6 +8,7 @@ using System.Threading;
 using BrightLight.PluginInterface.Result;
 using BrightLight.PluginInterface;
 using Microsoft.AspNetCore.WebUtilities;
+using BrightLight.Plugin.Builtin.Localization;
 
 namespace BrightLight.Plugin.Builtin.Providers
 {
@@ -16,6 +17,10 @@ namespace BrightLight.Plugin.Builtin.Providers
         private HttpClient _client;
 
         private const string url = "https://www.wikipedia.org/w/api.php";
+
+        public string Name => Resources.ProviderWikipediaName;
+
+        public string Description => Resources.ProviderWikipediaDescription;
 
         public WikipediaProvider()
         {

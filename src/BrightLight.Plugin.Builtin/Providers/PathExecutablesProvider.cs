@@ -9,11 +9,16 @@ using Microsoft.Win32;
 using BrightLight.PluginInterface.Result;
 using BrightLight.PluginInterface;
 using BrightLight.PluginInterface.Result.Helpers;
+using BrightLight.Plugin.Builtin.Localization;
 
 namespace BrightLight.Plugin.Builtin.Providers
 {
     public class PathExecutablesProvider : ISearchProvider
     {
+        public string Name => Resources.ProviderPathExecutablesName;
+
+        public string Description => Resources.ProviderPathExecutablesDescription;
+
         // https://stackoverflow.com/questions/3855956/check-if-an-executable-exists-in-the-windows-path
         // TODO: https://weblogs.asp.net/whaggard/111232
         public static string GetFullPathUsingEnvironmentVariablePath(string exeName)
