@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.8.0" />
+    <PackageReference Include="Avalonia.Direct2D1" Version="0.8.0" />
+    <PackageReference Include="Avalonia.Win32" Version="0.8.0" />
+    <PackageReference Include="Avalonia.Win32.Interoperability" Version="0.8.0" />
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.0.8" />
     <PackageReference Include="WpfMath" Version="0.6.0" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="3.0.0-preview4.19212.13" />
@@ -39,7 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UI\Controls\" />
+    <Page Update="App %282%29.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
 </Project>

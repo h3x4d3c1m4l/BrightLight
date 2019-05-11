@@ -9,13 +9,20 @@ using Autofac;
 using BrightLight.PluginInterface;
 using Autofac.Core;
 using BrightLight.DesktopApp.WPF.UI.Controls;
+using Avalonia;
+using Application = Avalonia.Application;
+using Avalonia.Markup.Xaml.Styling;
+using Avalonia.Markup.Xaml;
+using Avalonia.Styling;
+using Avalonia.Themes.Default;
+using BrightLight.DesktopApp.WPF.UI.Tools;
 
 namespace BrightLight.DesktopApp.WPF
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : System.Windows.Application
     {
         private HotKey _showHotKey; // TODO: config window to make this a custom set hotkey
 
@@ -36,16 +43,20 @@ namespace BrightLight.DesktopApp.WPF
             }
 
             InitializeComponent();
+            AppBuilder.Configure<AvaloniaApp>().UseWin32().UseDirect2D1().SetupWithoutStarting();
 
             var builder = new ContainerBuilder();
             builder.RegisterInstance(Dispatcher);
             builder.RegisterType<RunUsingWpfDispatcherHelper>().As<IRunOnUiThreadHelper>().SingleInstance();
-            builder.RegisterType<MainViewModel>().SingleInstance();
-            builder.RegisterType<SettingsViewModel>().SingleInstance();
-            builder.RegisterType<MainWindow>().AutoActivate().SingleInstance();
-            builder.RegisterType<SettingsWindow>().SingleInstance();
-            builder.RegisterType<TaskbarIcon>().AutoActivate().SingleInstance();
+            builder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
+            builder.RegisterType<SettingsViewModel>().AsSelf().SingleInstance();
+            builder.RegisterType<MainWindow>().AsSelf().AutoActivate().SingleInstance();
+            builder.RegisterType<SettingsWindow>().AsSelf().SingleInstance();
+            builder.RegisterType<TaskbarIcon>().AsSelf().AutoActivate().SingleInstance();
+            builder.Register((c) => Settings.LoadOrDefault()).AsSelf().SingleInstance();
             Container = builder.Build();
+
+            Container.Resolve<SettingsWindow>().Show();
 
             _showHotKey = new HotKey(Key.Space, KeyModifier.Alt, key =>
             {
@@ -66,6 +77,18 @@ namespace BrightLight.DesktopApp.WPF
             File.WriteAllText(logfilePath, ex.ToString());
 
             MessageBox.Show($"A fatal error occured in BrightLight and the application will be closed. A log file has been written to disk to help the developers fix the issue.\r\n\r\n{logfilePath}", "BrightLight - Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    public class AvaloniaApp : Application
+    {
+        public override void Initialize()
+        {
+            Styles.Add(new DefaultTheme());
+            var loader = new AvaloniaXamlLoader();
+            var baseLight = (IStyle)loader.Load(
+                new Uri("resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"));
+            Styles.Add(baseLight);
         }
     }
 }

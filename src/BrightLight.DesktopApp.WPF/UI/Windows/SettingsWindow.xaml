@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BrightLight.DesktopApp.WPF.UI.Windows"
+        xmlns:wpf="clr-namespace:Avalonia.Win32.Interop.Wpf;assembly=Avalonia.Win32.Interop"
+        xmlns:av="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls"
         mc:Ignorable="d"
         Title="BrightLight - Settings" Height="200" Width="300" WindowStyle="ToolWindow" Closing="WindowClosing">
-    <Grid>
-        <Label Content="No settings yet!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    </Grid>
+    <wpf:WpfAvaloniaHost>
+        
+    </wpf:WpfAvaloniaHost>
 </Window>

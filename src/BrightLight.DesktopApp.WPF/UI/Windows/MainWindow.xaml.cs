@@ -25,6 +25,7 @@ using System.Windows.Forms;
 using ListView = System.Windows.Controls.ListView;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using BrightLight.DesktopApp.WPF.UI.Controls;
+using BrightLight.DesktopApp.WPF.UI.Tools;
 
 namespace BrightLight.DesktopApp.WPF.UI.Windows
 {

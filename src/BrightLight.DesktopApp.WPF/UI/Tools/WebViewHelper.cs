@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 
-namespace BrightLight.DesktopApp.WPF.UI
+namespace BrightLight.DesktopApp.WPF.UI.Tools
 {
     /// <summary>
     /// Helper class for Microsoft.Toolkit.Wpf.UI.Controls.WebViewCompatible.

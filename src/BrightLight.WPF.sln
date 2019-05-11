@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.352
@@ -60,5 +60,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BEFF8D0F-98F9-4BE1-A65E-21606583E512}
+	EndGlobalSection
+	GlobalSection(AvalonStudioProperties) = preSolution
+		StartupItem = {6002AF45-F6DF-49F0-A1DD-F899B0CEE5CA}
 	EndGlobalSection
 EndGlobal

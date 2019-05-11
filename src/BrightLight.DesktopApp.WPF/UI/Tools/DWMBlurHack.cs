@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Interop;
 
-namespace BrightLight.DesktopApp.WPF
+namespace BrightLight.DesktopApp.WPF.UI.Tools
 {
     static class DWMBlurHack
     {

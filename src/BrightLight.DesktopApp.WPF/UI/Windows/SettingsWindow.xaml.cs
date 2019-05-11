@@ -23,6 +23,17 @@ namespace BrightLight.DesktopApp.WPF.UI.Windows
         public SettingsWindow()
         {
             InitializeComponent();
+            //var view = new MainView();
+            //view.AttachedToVisualTree += delegate
+            //{
+            //    ((TopLevel)view.GetVisualRoot()).AttachDevTools();
+            //};
+            //Host.Content = view;
+            //var btn = (Avalonia.Controls.Button)RightBtn.Content;
+            //btn.Click += delegate
+            //{
+            //    btn.Content += "!";
+            //};
         }
 
         private void WindowClosing(object sender, CancelEventArgs e)
