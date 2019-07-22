@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="GitVersionTask" Version="5.0.0-beta5.40">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="MathNet.Symbolics" Version="0.20.0" />
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
@@ -12,9 +16,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
     <PackageReference Include="System.Text.Encodings.Web" Version="4.5.0" />
-    <PackageReference Include="Vanara.PInvoke.Ole" Version="2.3.7" />
-    <PackageReference Include="Vanara.PInvoke.Shared" Version="2.3.7" />
-    <PackageReference Include="Vanara.PInvoke.Shell32" Version="2.3.7" />
+    <PackageReference Include="Vanara.PInvoke.Ole" Version="2.3.11" />
+    <PackageReference Include="Vanara.PInvoke.Shared" Version="2.3.11" />
+    <PackageReference Include="Vanara.PInvoke.Shell32" Version="2.3.11" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Fontawesome5" Version="1.0.11" />
+    <PackageReference Include="Fontawesome5" Version="1.0.12" />
+    <PackageReference Include="GitVersionTask" Version="5.0.0-beta5.40">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
