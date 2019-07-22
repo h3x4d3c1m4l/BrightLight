@@ -1,4 +1,5 @@
-﻿using BrightLight.PluginInterface;
+﻿using BrightLight.Plugin.Builtin.Localization;
+using BrightLight.PluginInterface;
 using BrightLight.PluginInterface.Result;
 using BrightLight.PluginInterface.Result.Helpers;
 using System;
@@ -14,6 +15,10 @@ namespace BrightLight.Plugin.Builtin.Providers
 {
     public class ControlPanelProvider : ISearchProvider
     {
+        public string Name => Resources.ProviderControlPanelName;
+
+        public string Description => Resources.ProviderControlPanelDescription;
+
         public void Dispose()
         {
         }

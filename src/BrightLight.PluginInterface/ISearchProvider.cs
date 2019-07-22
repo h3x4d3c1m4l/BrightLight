@@ -10,6 +10,10 @@ namespace BrightLight.PluginInterface
     /// </summary>
     public interface ISearchProvider : IDisposable
     {
+        string Name { get; }
+
+        string Description { get; }
+
         Task<SearchResultCollection> SearchAsync(SearchQuery query, CancellationToken ct);
     }
 

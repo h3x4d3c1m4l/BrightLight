@@ -11,6 +11,7 @@ using System.Threading;
 using BrightLight.PluginInterface.Result;
 using BrightLight.PluginInterface;
 using System.Reflection;
+using System.IO;
 
 namespace BrightLight.Shared.ViewModels
 {
@@ -169,32 +170,25 @@ namespace BrightLight.Shared.ViewModels
                       .Throttle(TimeSpan.FromMilliseconds(500))
                       .Subscribe(StartQuerying);
 
-            // get all search providers
-            // http://codesnippets.fesslersoft.de/get-all-types-that-implement-a-specific-interface/
-            var pluginAssemblies = new List<Assembly>
+            // find plugins in same dir or plugin dir
+            var appDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            var files = Directory.GetFiles(appDir, "BrightLight.Plugin.*.dll", SearchOption.AllDirectories);
+            foreach (var f in files)
             {
-                Assembly.Load("BrightLight.Plugin.Builtin"),
-                //Assembly.Load("BrightLight.Plugin.DevTools")
-                // TODO: load other plugins
-            };
+                if (a.EndsWith(".resources.dll"))
+                    continue;
 
-            var searchProviders = new List<ISearchProvider>();
-            foreach (var a in pluginAssemblies)
-            {
-                var currentAssemblyPluginTypes = a.GetTypes().Where(y => typeof(IPlugin).IsAssignableFrom(y) && !y.IsInterface);
-
-                foreach (var p in currentAssemblyPluginTypes)
+                try
                 {
-                    var plugin = (IPlugin)Activator.CreateInstance(p);
-                    var pluginSearchProviders = plugin.Init(runOnUiThreadHelper);
-                    foreach (var pSP in pluginSearchProviders)
-                    {
-                        searchProviders.Add(pSP);
-                    }
+                    var assembly = Assembly.LoadFile(f);
                 }
+                catch (Exception ex)
+                {
+
+                }
+                
+                // TODO: settings
             }
-            
-            this.searchProviders = searchProviders;
         }
 
         #region INotifyPropertyChanged implementation
