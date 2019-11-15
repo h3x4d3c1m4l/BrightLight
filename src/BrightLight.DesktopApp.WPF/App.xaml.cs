@@ -9,6 +9,7 @@ using Autofac;
 using BrightLight.PluginInterface;
 using Autofac.Core;
 using BrightLight.DesktopApp.WPF.UI.Controls;
+using System.Diagnostics;
 
 namespace BrightLight.DesktopApp.WPF
 {
@@ -25,7 +26,8 @@ namespace BrightLight.DesktopApp.WPF
 
         private App()
         {
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            if (!Debugger.IsAttached)
+                AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             _mutex = new Mutex(false, $"h3x4d3c1m4l BrightLight - {Environment.UserName}", out bool createdNew);
             if (!createdNew)
@@ -37,12 +39,13 @@ namespace BrightLight.DesktopApp.WPF
 
             InitializeComponent();
 
+            var test = new MainWindow(new MainViewModel(new RunUsingWpfDispatcherHelper(Dispatcher)));
             var builder = new ContainerBuilder();
             builder.RegisterInstance(Dispatcher);
             builder.RegisterType<RunUsingWpfDispatcherHelper>().As<IRunOnUiThreadHelper>().SingleInstance();
             builder.RegisterType<MainViewModel>().SingleInstance();
             builder.RegisterType<SettingsViewModel>().SingleInstance();
-            builder.RegisterType<MainWindow>().AutoActivate().SingleInstance();
+            builder.RegisterType<MainWindow>().AsSelf().AutoActivate().SingleInstance();
             builder.RegisterType<SettingsWindow>().SingleInstance();
             builder.RegisterType<TaskbarIcon>().AutoActivate().SingleInstance();
             Container = builder.Build();

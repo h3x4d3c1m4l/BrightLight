@@ -175,7 +175,7 @@ namespace BrightLight.Shared.ViewModels
             var files = Directory.GetFiles(appDir, "BrightLight.Plugin.*.dll", SearchOption.AllDirectories);
             foreach (var f in files)
             {
-                if (a.EndsWith(".resources.dll"))
+                if (f.EndsWith(".resources.dll"))
                     continue;
 
                 try
