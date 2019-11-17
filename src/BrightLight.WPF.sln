@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrightLight.DesktopApp.WPF", "BrightLight.DesktopApp.WPF\BrightLight.DesktopApp.WPF.csproj", "{6002AF45-F6DF-49F0-A1DD-F899B0CEE5CA}"
-	ProjectSection(ProjectDependencies) = postProject
-		{AF174EA3-DF3E-4A89-B967-80EEB710193B} = {AF174EA3-DF3E-4A89-B967-80EEB710193B}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrightLight.Plugin.Builtin", "BrightLight.Plugin.Builtin\BrightLight.Plugin.Builtin.csproj", "{3E806518-9E56-4920-99E3-3471D5EA57E0}"
 EndProject
@@ -17,9 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrightLight.Shared", "Brigh
 		{499D79E5-CF97-4AF5-827E-8570FFDBCFE8} = {499D79E5-CF97-4AF5-827E-8570FFDBCFE8}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrightLight.DesktopApp.WPF.FrameworkHack", "BrightLight.DesktopApp.WPF.FrameworkHack\BrightLight.DesktopApp.WPF.FrameworkHack.csproj", "{AF174EA3-DF3E-4A89-B967-80EEB710193B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightLight.Plugin.DevTools", "BrightLight.Plugin.DevTools\BrightLight.Plugin.DevTools.csproj", "{BE613EE9-211E-44AE-B416-549674FC0DAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrightLight.Plugin.DevTools", "BrightLight.Plugin.DevTools\BrightLight.Plugin.DevTools.csproj", "{BE613EE9-211E-44AE-B416-549674FC0DAF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{499D79E5-CF97-4AF5-827E-8570FFDBCFE8} = {499D79E5-CF97-4AF5-827E-8570FFDBCFE8}
 	EndProjectSection
@@ -46,10 +41,6 @@ Global
 		{5776C55E-BF6B-4C9D-BBC8-9EBC313CC3E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5776C55E-BF6B-4C9D-BBC8-9EBC313CC3E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5776C55E-BF6B-4C9D-BBC8-9EBC313CC3E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AF174EA3-DF3E-4A89-B967-80EEB710193B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF174EA3-DF3E-4A89-B967-80EEB710193B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF174EA3-DF3E-4A89-B967-80EEB710193B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF174EA3-DF3E-4A89-B967-80EEB710193B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BE613EE9-211E-44AE-B416-549674FC0DAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BE613EE9-211E-44AE-B416-549674FC0DAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE613EE9-211E-44AE-B416-549674FC0DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU

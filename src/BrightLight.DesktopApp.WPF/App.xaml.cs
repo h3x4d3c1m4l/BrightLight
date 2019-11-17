@@ -7,22 +7,21 @@ using BrightLight.Shared.ViewModels;
 using BrightLight.DesktopApp.WPF.UI.Windows;
 using Autofac;
 using BrightLight.PluginInterface;
-using Autofac.Core;
 using BrightLight.DesktopApp.WPF.UI.Controls;
 using Avalonia;
-using Application = Avalonia.Application;
-using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
 using Avalonia.Themes.Default;
 using BrightLight.DesktopApp.WPF.UI.Tools;
+using System.Diagnostics;
+using Application = System.Windows.Application;
 
 namespace BrightLight.DesktopApp.WPF
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : System.Windows.Application
+    public partial class App : Application
     {
         private HotKey _showHotKey; // TODO: config window to make this a custom set hotkey
 
@@ -32,7 +31,8 @@ namespace BrightLight.DesktopApp.WPF
 
         private App()
         {
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            if (!Debugger.IsAttached)
+                AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             _mutex = new Mutex(false, $"h3x4d3c1m4l BrightLight - {Environment.UserName}", out bool createdNew);
             if (!createdNew)
@@ -45,6 +45,7 @@ namespace BrightLight.DesktopApp.WPF
             InitializeComponent();
             AppBuilder.Configure<AvaloniaApp>().UseWin32().UseDirect2D1().SetupWithoutStarting();
 
+            var test = new MainWindow(new MainViewModel(new RunUsingWpfDispatcherHelper(Dispatcher)));
             var builder = new ContainerBuilder();
             builder.RegisterInstance(Dispatcher);
             builder.RegisterType<RunUsingWpfDispatcherHelper>().As<IRunOnUiThreadHelper>().SingleInstance();
@@ -78,17 +79,17 @@ namespace BrightLight.DesktopApp.WPF
 
             MessageBox.Show($"A fatal error occured in BrightLight and the application will be closed. A log file has been written to disk to help the developers fix the issue.\r\n\r\n{logfilePath}", "BrightLight - Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-    }
 
-    public class AvaloniaApp : Application
-    {
-        public override void Initialize()
+        private class AvaloniaApp : Avalonia.Application
         {
-            Styles.Add(new DefaultTheme());
-            var loader = new AvaloniaXamlLoader();
-            var baseLight = (IStyle)loader.Load(
-                new Uri("resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"));
-            Styles.Add(baseLight);
+            public override void Initialize()
+            {
+                Styles.Add(new DefaultTheme());
+                var loader = new AvaloniaXamlLoader();
+                var baseLight = (IStyle)loader.Load(
+                    new Uri("resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"));
+                Styles.Add(baseLight);
+            }
         }
     }
 }
