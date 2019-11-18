@@ -25,12 +25,15 @@ namespace BrightLight.Plugin.Builtin.Providers
 
         public string Description => Resources.ProviderStartMenuDescription;
 
-        public StartMenuProvider()
+        private IRunOnUiThreadHelper _runOnUiThreadHelper;
+
+        public StartMenuProvider(IRunOnUiThreadHelper runOnUiThreadHelper)
         {
             var wscriptShellType = Type.GetTypeFromProgID("WScript.Shell");
             _wscriptShell = Activator.CreateInstance(wscriptShellType);
             _allUsersStartMenuPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu);
             _currentUserStartMenuPath = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu);
+            _runOnUiThreadHelper = runOnUiThreadHelper;
         }
 
         public void Dispose()
@@ -55,20 +58,6 @@ namespace BrightLight.Plugin.Builtin.Providers
                 // ok, so we are not allowed to dig into that directory. Move on.
             }
         }
-
-        //private Bitmap GetBitmapFromApplicationExe(string exePath)
-        //{
-        //    var ie = new IconExtractor.IconExtractor(exePath);
-        //    if (ie.Count == 0)
-        //    {
-        //        return null;
-        //    }
-
-        //    var icon0 = ie.GetIcon(0);
-        //    var icons = IconUtil.Split(icon0);
-        //    var icon = icons.OrderByDescending(x => x.Height * x.Width).First();
-        //    return icon.ToBitmap();
-        //}
 
         public async Task<SearchResultCollection> SearchAsync(SearchQuery query, CancellationToken ct)
         {
@@ -112,20 +101,21 @@ namespace BrightLight.Plugin.Builtin.Providers
 
                     try
                     {
-                        var shortcut = _wscriptShell.CreateShortcut(r.LaunchPath);
-                        var shortcutTarget = shortcut.TargetPath.ToString();
-                        var shortcutArguments = shortcut.Arguments.ToString();
-                        if (!string.IsNullOrWhiteSpace(shortcutTarget) && shortcutTarget.EndsWith(".exe", StringComparison.OrdinalIgnoreCase) && File.Exists(shortcutTarget))
-                        {
-                            r.Icon = new WindowsPEResourceIcon { FilePath = shortcutTarget };
-                        }
+                        r.Icon = new WindowsPEResourceIcon { FilePath = r.LaunchPath };
+                        //var shortcut = _wscriptShell.CreateShortcut(r.LaunchPath);
+                        //var shortcutTarget = shortcut.TargetPath.ToString();
+                        //var shortcutArguments = shortcut.Arguments.ToString();
+                        //if (!string.IsNullOrWhiteSpace(shortcutTarget) && shortcutTarget.EndsWith(".exe", StringComparison.OrdinalIgnoreCase) && File.Exists(shortcutTarget))
+                        //{
+                        //    r.Icon = new WindowsPEResourceIcon { FilePath = r.LaunchPath };
+                        //}
                     }
                     catch (Exception)
                     {
                     }
                 }
 
-                Plugin.RunOnUiThreadHelper.RunOnUIThread(() =>
+                _runOnUiThreadHelper.RunOnUIThread(() =>
                 {
                     foreach (var d in toDelete)
                     {

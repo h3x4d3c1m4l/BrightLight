@@ -7,6 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using System.Drawing.Imaging;
+using IWshRuntimeLibrary;
 
 namespace BrightLight.DesktopApp.WPF.UI.Converters
 {
@@ -15,14 +17,23 @@ namespace BrightLight.DesktopApp.WPF.UI.Converters
         // https://stackoverflow.com/questions/22499407/how-to-display-a-bitmap-in-a-wpf-image
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is WindowsPEResourceIcon)
+            if (value is WindowsPEResourceIcon resIcon)
             {
-                // extract icon van exe
-                var executableIcon = value as WindowsPEResourceIcon;
+                var exePath = resIcon.FilePath;
+
+                // check if lnk, if so resolve the executable location first
+                if (resIcon.FilePath.EndsWith(".lnk", StringComparison.OrdinalIgnoreCase))
+                {
+                    var shell = new WshShell();
+                    var shortcut = (IWshShortcut)shell.CreateShortcut(resIcon.FilePath);
+                    exePath = shortcut.TargetPath;
+                }
+
+                // extract icon from exe
                 try
                 {
-                    var extractor = new IconExtractor(executableIcon.FilePath);
-                    var iconCollection = extractor.GetIcon(executableIcon.Index);
+                    var extractor = new IconExtractor(exePath);
+                    var iconCollection = extractor.GetIcon(resIcon.Index);
                     var biggestIcon = IconUtil.Split(iconCollection).OrderByDescending(x => x.Width * x.Height).FirstOrDefault();
                     if (biggestIcon != null)
                         return CreateBitmapImageFromBitmap(biggestIcon.ToBitmap());
@@ -45,7 +56,7 @@ namespace BrightLight.DesktopApp.WPF.UI.Converters
         {
             using (var memory = new MemoryStream())
             {
-                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                bitmap.Save(memory, ImageFormat.Png);
                 memory.Position = 0;
                 var bitmapimage = new BitmapImage();
                 bitmapimage.BeginInit();

@@ -12,6 +12,7 @@ using BrightLight.PluginInterface.Result;
 using BrightLight.PluginInterface;
 using System.Reflection;
 using System.IO;
+using Container = SimpleInjector.Container;
 
 namespace BrightLight.Shared.ViewModels
 {
@@ -52,7 +53,7 @@ namespace BrightLight.Shared.ViewModels
             Searching = false;
         }
 
-        private readonly List<ISearchProvider> searchProviders;
+        private readonly IList<ISearchProvider> _searchProviders;
 
         private SearchResult _selectedSearchResult;
 
@@ -108,7 +109,7 @@ namespace BrightLight.Shared.ViewModels
 
             var token = _searchCancellationTokenSource = new CancellationTokenSource();
             var n = 0;
-            foreach (var sp in searchProviders)
+            foreach (var sp in _searchProviders)
             {
                 Task.Run(async () =>
                 {
@@ -135,7 +136,7 @@ namespace BrightLight.Shared.ViewModels
                                 SelectedSearchResult = result.Results.First(); // new result more important than old selected one so show the user the new result instead
                         }
                         Interlocked.Increment(ref n);
-                        if (n == searchProviders.Count)
+                        if (n == _searchProviders.Count)
                             _runOnUiThreadHelper.RunOnUIThread(() => Searching = false);
                     }
                 }, token.Token);
@@ -158,10 +159,27 @@ namespace BrightLight.Shared.ViewModels
 
         public bool MayQuery => !string.IsNullOrWhiteSpace(Query) && Query.Length > 1;
 
+        private Container _pluginContainer;
+
         public MainViewModel(IRunOnUiThreadHelper runOnUiThreadHelper)
         {
             _runOnUiThreadHelper = runOnUiThreadHelper;
-            Query = "";
+            Query = string.Empty;
+
+            // plugin initialization
+            // https://simpleinjector.readthedocs.io/en/latest/advanced.html#plugins
+            var pluginDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory);
+
+            var pluginAssemblies =
+                from file in new DirectoryInfo(pluginDirectory).GetFiles("BrightLight.Plugin.*.dll")
+                where !file.Name.EndsWith(".resources.dll")
+                select Assembly.Load(AssemblyName.GetAssemblyName(file.FullName));
+
+            _searchProviders = new List<ISearchProvider>();
+            _pluginContainer = new Container();
+            _pluginContainer.RegisterInstance(runOnUiThreadHelper);
+            _pluginContainer.Verify();
+            _searchProviders = _pluginContainer.Collection.Create<ISearchProvider>(pluginAssemblies);
 
             // throttle Query change
             Observable.FromEventPattern<PropertyChangedEventArgs>(this, "PropertyChanged")
@@ -169,27 +187,6 @@ namespace BrightLight.Shared.ViewModels
                       .Select(_ => Query)
                       .Throttle(TimeSpan.FromMilliseconds(500))
                       .Subscribe(StartQuerying);
-
-            // find plugins in same dir or plugin dir
-            var appDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            var files = Directory.GetFiles(appDir, "BrightLight.Plugin.*.dll", SearchOption.AllDirectories);
-            foreach (var f in files)
-            {
-                if (f.EndsWith(".resources.dll"))
-                    continue;
-
-                try
-                {
-                    var assembly = Assembly.LoadFile(f);
-                    var pluginType = assembly.ExportedTypes.Single(x => x.IsAssignableFrom(typeof(IPlugin)));
-                }
-                catch (Exception ex)
-                {
-                    // TODO: handling
-                }
-                
-                // TODO: settings
-            }
         }
 
         #region INotifyPropertyChanged implementation

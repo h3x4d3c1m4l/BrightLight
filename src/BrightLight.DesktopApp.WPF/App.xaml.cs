@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Input;
 using BrightLight.Shared.ViewModels;
 using BrightLight.DesktopApp.WPF.UI.Windows;
-using Autofac;
 using BrightLight.PluginInterface;
 using BrightLight.DesktopApp.WPF.UI.Controls;
 using Avalonia;
@@ -15,6 +14,8 @@ using Avalonia.Themes.Default;
 using BrightLight.DesktopApp.WPF.UI.Tools;
 using System.Diagnostics;
 using Application = System.Windows.Application;
+using Container = SimpleInjector.Container;
+using BrightLight.Shared;
 
 namespace BrightLight.DesktopApp.WPF
 {
@@ -27,7 +28,7 @@ namespace BrightLight.DesktopApp.WPF
 
         private Mutex _mutex;
 
-        private static IContainer Container;
+        private static Container Container;
 
         private App()
         {
@@ -45,24 +46,24 @@ namespace BrightLight.DesktopApp.WPF
             InitializeComponent();
             AppBuilder.Configure<AvaloniaApp>().UseWin32().UseDirect2D1().SetupWithoutStarting();
 
-            var test = new MainWindow(new MainViewModel(new RunUsingWpfDispatcherHelper(Dispatcher)));
-            var builder = new ContainerBuilder();
-            builder.RegisterInstance(Dispatcher);
-            builder.RegisterType<RunUsingWpfDispatcherHelper>().As<IRunOnUiThreadHelper>().SingleInstance();
-            builder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
-            builder.RegisterType<SettingsViewModel>().AsSelf().SingleInstance();
-            builder.RegisterType<MainWindow>().AsSelf().AutoActivate().SingleInstance();
-            builder.RegisterType<SettingsWindow>().AsSelf().SingleInstance();
-            builder.RegisterType<TaskbarIcon>().AsSelf().AutoActivate().SingleInstance();
-            builder.Register((c) => Settings.LoadOrDefault()).AsSelf().SingleInstance();
-            Container = builder.Build();
+            var test = new SearchWindow(new MainViewModel(new RunUsingWpfDispatcherHelper(Dispatcher)));
+            Container = new Container();
+            Container.RegisterInstance(Dispatcher);
+            Container.RegisterSingleton<IRunOnUiThreadHelper, RunUsingWpfDispatcherHelper>();
+            Container.RegisterSingleton<MainViewModel>();
+            Container.RegisterSingleton<SettingsViewModel>();
+            Container.RegisterSingleton<SearchWindow>();
+            Container.RegisterSingleton<SettingsWindow>();
+            Container.RegisterSingleton<TaskbarIcon>();
+            Container.RegisterSingleton(() => Settings.LoadOrDefault());
+            Container.Verify();
 
-            Container.Resolve<SettingsWindow>().Show();
+            Container.GetInstance<SettingsWindow>().Show();
 
             _showHotKey = new HotKey(Key.Space, KeyModifier.Alt, key =>
             {
-                Container.Resolve<MainViewModel>().Reset();
-                Container.Resolve<MainWindow>().Show();
+                Container.GetInstance<MainViewModel>().Reset();
+                Container.GetInstance<SearchWindow>().Show();
             });
         }
 

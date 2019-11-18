@@ -9,19 +9,30 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.8.0" />
-    <PackageReference Include="Avalonia.Direct2D1" Version="0.8.0" />
-    <PackageReference Include="Avalonia.Win32" Version="0.8.0" />
-    <PackageReference Include="Avalonia.Win32.Interoperability" Version="0.8.0" />
+    <COMReference Include="IWshRuntimeLibrary.dll">
+      <Guid>f935dc20-1cf0-11d0-adb9-00c04fd58a0b</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.8.3" />
+    <PackageReference Include="Avalonia.Direct2D1" Version="0.8.3" />
+    <PackageReference Include="Avalonia.Win32" Version="0.8.3" />
+    <PackageReference Include="Avalonia.Win32.Interoperability" Version="0.8.3" />
     <PackageReference Include="GitVersionTask" Version="5.1.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.0.8" />
+    <PackageReference Include="SimpleInjector" Version="4.7.1" />
     <PackageReference Include="WpfMath" Version="0.7.0" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="3.0.0" />
     <PackageReference Include="Microsoft.Toolkit.Wpf.UI.Controls.WebView" Version="6.0.0" />
-    <PackageReference Include="Autofac" Version="4.9.4" />
     <PackageReference Include="FontAwesome5" Version="2.0.0" />
   </ItemGroup>
 

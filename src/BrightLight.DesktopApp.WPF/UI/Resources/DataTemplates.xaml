@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:ui="clr-namespace:BrightLight.DesktopApp.WPF.UI;assembly=BrightLight.DesktopApp.WPF"
+                    xmlns:tools="clr-namespace:BrightLight.DesktopApp.WPF.UI.Tools;assembly=BrightLight.DesktopApp.WPF"
                     xmlns:fa5="http://schemas.fontawesome.com/icons/"
                     xmlns:mstoolkit="clr-namespace:Microsoft.Toolkit.Wpf.UI.Controls;assembly=Microsoft.Toolkit.Wpf.UI.Controls.WebView"
                     xmlns:wpfmath="clr-namespace:WpfMath.Controls;assembly=WpfMath"
@@ -27,13 +27,13 @@
     <DataTemplate DataType="{x:Type resultTypes:UrlSearchResult}">
         <Grid>
             <fa5:SvgAwesome Icon="Solid_Cog" Spin="True" Height="48" Width="48" />
-            <mstoolkit:WebViewCompatible ui:WebViewHelper.Url="{Binding Url}" />
+            <mstoolkit:WebViewCompatible tools:WebViewHelper.Url="{Binding Url}" />
         </Grid>
     </DataTemplate>
     <DataTemplate DataType="{x:Type resultTypes:HtmlSearchResult}">
         <Grid>
             <fa5:SvgAwesome Icon="Solid_Cog" Spin="True" Height="48" Width="48" />
-            <mstoolkit:WebViewCompatible ui:WebViewHelper.Body="{Binding Html}" />
+            <mstoolkit:WebViewCompatible tools:WebViewHelper.Body="{Binding Html}" />
         </Grid>
     </DataTemplate>
     <DataTemplate DataType="{x:Type resultTypes:MathSearchResult}">

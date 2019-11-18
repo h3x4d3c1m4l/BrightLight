@@ -9,13 +9,11 @@ namespace BrightLight.Plugin.Builtin
 {
     public class Plugin : IPlugin
     {
-        public static IRunOnUiThreadHelper RunOnUiThreadHelper;
-
         public string Name => Resources.PluginName;
-        public string VersionName => "";
+        public string VersionName => null;
         public string Author => "Sander \"h3x4d3c1m4l\" in 't Hout";
         public IImage Logo => null;
-        public string Description => throw new NotImplementedException();
-        public string Website => throw new NotImplementedException();
+        public string Description => null;
+        public string Website => null;
     }
 }

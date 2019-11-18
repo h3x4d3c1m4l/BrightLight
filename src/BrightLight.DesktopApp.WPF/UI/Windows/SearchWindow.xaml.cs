@@ -32,7 +32,7 @@ namespace BrightLight.DesktopApp.WPF.UI.Windows
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SearchWindow : Window
     {
         private WindowInteropHelper _windowInteropHelper;
 
@@ -42,7 +42,7 @@ namespace BrightLight.DesktopApp.WPF.UI.Windows
 
         private MainViewModel _vm;
 
-        public MainWindow(MainViewModel vm)
+        public SearchWindow(MainViewModel vm)
         {
             _vm = vm;
             DataContext = _vm;
