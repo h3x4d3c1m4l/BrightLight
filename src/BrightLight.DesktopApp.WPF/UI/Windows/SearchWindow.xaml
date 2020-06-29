@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BrightLight.DesktopApp.WPF"
         xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-        xmlns:fa5="http://schemas.fontawesome.com/icons/"
+        xmlns:fa5="http://schemas.fontawesome.com/icons/" xmlns:controls="clr-namespace:BrightLight.DesktopApp.WPF.UI.Controls"
         mc:Ignorable="d"
         Background="Transparent"
         Name="BrightLightMainWindow" Height="60" UseLayoutRounding="True"

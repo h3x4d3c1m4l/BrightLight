@@ -158,5 +158,20 @@ namespace BrightLight.DesktopApp.WPF.UI.Windows
             var lv = (ListView) sender;
             lv.SelectedItems.Clear();
         }
+
+        private void TaskbarIcon_OpenSearchClicked(object sender, EventArgs e)
+        {
+            Show();
+        }
+
+        private void TaskbarIcon_ExitClicked(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void TaskbarIcon_OpenSettingsClicked(object sender, EventArgs e)
+        {
+            // TODO: actually have a working settings window
+        }
     }
 }

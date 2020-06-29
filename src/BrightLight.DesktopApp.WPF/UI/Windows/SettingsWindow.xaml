@@ -7,7 +7,7 @@
         xmlns:wpf="clr-namespace:Avalonia.Win32.Interop.Wpf;assembly=Avalonia.Win32.Interop"
         xmlns:av="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls"
         mc:Ignorable="d"
-        Title="BrightLight - Settings" Height="200" Width="300" WindowStyle="ToolWindow" Closing="WindowClosing">
+        Title="BrightLight - Settings" Height="200" Width="300" WindowStyle="ToolWindow" Closing="WindowClosing" Visibility="Collapsed">
     <wpf:WpfAvaloniaHost>
         
     </wpf:WpfAvaloniaHost>

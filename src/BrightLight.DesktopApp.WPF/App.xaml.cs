@@ -58,9 +58,7 @@ namespace BrightLight.DesktopApp.WPF
             Container.RegisterSingleton(() => Settings.LoadOrDefault());
             Container.Verify();
 
-            Container.GetInstance<SettingsWindow>().Show();
-
-            _showHotKey = new HotKey(Key.Space, KeyModifier.Alt, key =>
+            _showHotKey = new HotKey(Key.Space, KeyModifier.Ctrl | KeyModifier.Shift, key =>
             {
                 Container.GetInstance<MainViewModel>().Reset();
                 Container.GetInstance<SearchWindow>().Show();

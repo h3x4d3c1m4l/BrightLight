@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrightLight.DesktopApp.WPF.UI.Windows;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -18,25 +19,30 @@ namespace BrightLight.DesktopApp.WPF.UI.Controls
     /// </summary>
     public partial class TaskbarIcon : UserControl
     {
-        public TaskbarIcon()
+        SearchWindow _searchWindow;
+
+        SettingsWindow _settingsWindow;
+
+        public TaskbarIcon(SearchWindow searchWindow, SettingsWindow settingsWindow)
         {
             InitializeComponent();
+            _searchWindow = searchWindow;
+            _settingsWindow = settingsWindow;
         }
-        
+
         private void OpenSearchClick(object sender, RoutedEventArgs e)
         {
-            //Global.MainWindow.ShowMe();
+            _searchWindow.Show();
         }
 
         private void ExitClick(object sender, RoutedEventArgs e)
         {
-            //Global.MainViewModel.PrepareApplicationExit();
-            //Global.MainWindow.Close();
+            _searchWindow.Close();
         }
 
         private void OpenSettingsClick(object sender, RoutedEventArgs e)
         {
-            //Global.SettingsWindow.Show();
+            _settingsWindow.Show();
         }
     }
 }

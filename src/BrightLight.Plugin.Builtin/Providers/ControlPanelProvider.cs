@@ -43,16 +43,17 @@ namespace BrightLight.Plugin.Builtin.Providers
             var godmodeShellFolder = (Shell32.IShellFolder)desktopShellFolder.BindToObject(godmodePidl, null, new Guid("000214E6-0000-0000-C000-000000000046"));
             var itemEnum = godmodeShellFolder.EnumObjects(IntPtr.Zero, Shell32.SHCONTF.SHCONTF_CHECKING_FOR_CHILDREN | Shell32.SHCONTF.SHCONTF_FLATLIST | Shell32.SHCONTF.SHCONTF_NONFOLDERS | Shell32.SHCONTF.SHCONTF_FOLDERS | Shell32.SHCONTF.SHCONTF_INCLUDEHIDDEN | Shell32.SHCONTF.SHCONTF_INCLUDESUPERHIDDEN | Shell32.SHCONTF.SHCONTF_STORAGE);
 
-            while (itemEnum.Next(1, out IntPtr itemPidl, out uint fetched) == HRESULT.S_OK && fetched > 0)
+            var itemPidlArr = new IntPtr[1];
+            while (itemEnum.Next(1, itemPidlArr, out uint fetched) == HRESULT.S_OK && fetched > 0)
             {
-                var combinedPidl = Shell32.PIDL.Combine(godmodePidl, itemPidl);
+                var combinedPidl = Shell32.PIDL.Combine(godmodePidl, itemPidlArr[0]);
 
                 Shell32.SHCreateItemFromIDList(combinedPidl, typeof(Shell32.IShellItem2).GUID, out object shellItemObj);
                 Shell32.IShellItem2 shellItem = (Shell32.IShellItem2)shellItemObj;
 
                 try
                 {
-                    var extractIcon = (Shell32.IExtractIcon)godmodeShellFolder.GetUIObjectOf(IntPtr.Zero, 1, new IntPtr[] { itemPidl }, typeof(Shell32.IExtractIcon).GUID, IntPtr.Zero);
+                    var extractIcon = (Shell32.IExtractIcon)godmodeShellFolder.GetUIObjectOf(IntPtr.Zero, 1, new IntPtr[] { itemPidlArr[0] }, typeof(Shell32.IExtractIcon).GUID, IntPtr.Zero);
                     var iconPathSb = new StringBuilder(255);
                     extractIcon.GetIconLocation(Shell32.GetIconLocationFlags.GIL_FORSHELL, iconPathSb, iconPathSb.Capacity, out int iconIndex, out Shell32.GetIconLocationResultFlags flags);
 
