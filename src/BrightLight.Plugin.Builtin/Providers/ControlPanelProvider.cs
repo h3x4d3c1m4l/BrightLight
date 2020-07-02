@@ -27,6 +27,9 @@ namespace BrightLight.Plugin.Builtin.Providers
         // inspired by the source code of ClassicShell
         public async Task<SearchResultCollection> SearchAsync(SearchQuery query, CancellationToken ct)
         {
+            if (string.IsNullOrWhiteSpace(query.QueryString))
+                return null;
+
             var results = new ObservableCollection<SearchResult>();
             var resultCollection = new SearchResultCollection
             {
@@ -38,10 +41,22 @@ namespace BrightLight.Plugin.Builtin.Providers
                 Results = results
             };
 
-            Shell32.SHGetDesktopFolder(out Shell32.IShellFolder desktopShellFolder);
-            Shell32.SHParseDisplayName("shell:::{ED7BA470-8E54-465E-825C-99712043E01C}", IntPtr.Zero, out Shell32.PIDL godmodePidl, 0, out Shell32.SFGAO psfgaoOut);
+            HRESULT hresult;
+            hresult = Shell32.SHGetDesktopFolder(out Shell32.IShellFolder desktopShellFolder);
+            if (hresult != HRESULT.S_OK)
+                throw new Exception($"Shell32.SHGetDesktopFolder returned '{hresult}'");
+
+            hresult = Shell32.SHParseDisplayName("shell:::{ED7BA470-8E54-465E-825C-99712043E01C}", IntPtr.Zero, out Shell32.PIDL godmodePidl, 0, out Shell32.SFGAO psfgaoOut);
+            if (hresult != HRESULT.S_OK)
+                throw new Exception($"Shell32.SHParseDisplayName returned '{hresult}'");
+
             var godmodeShellFolder = (Shell32.IShellFolder)desktopShellFolder.BindToObject(godmodePidl, null, new Guid("000214E6-0000-0000-C000-000000000046"));
+            if (godmodeShellFolder == null)
+                throw new Exception($"BindToObject returned null");
+
             var itemEnum = godmodeShellFolder.EnumObjects(IntPtr.Zero, Shell32.SHCONTF.SHCONTF_CHECKING_FOR_CHILDREN | Shell32.SHCONTF.SHCONTF_FLATLIST | Shell32.SHCONTF.SHCONTF_NONFOLDERS | Shell32.SHCONTF.SHCONTF_FOLDERS | Shell32.SHCONTF.SHCONTF_INCLUDEHIDDEN | Shell32.SHCONTF.SHCONTF_INCLUDESUPERHIDDEN | Shell32.SHCONTF.SHCONTF_STORAGE);
+            if (godmodeShellFolder == null)
+                throw new Exception($"EnumObjects returned null");
 
             var itemPidlArr = new IntPtr[1];
             while (itemEnum.Next(1, itemPidlArr, out uint fetched) == HRESULT.S_OK && fetched > 0)

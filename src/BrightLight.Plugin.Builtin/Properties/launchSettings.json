@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BrightLight.Plugin.Builtin": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

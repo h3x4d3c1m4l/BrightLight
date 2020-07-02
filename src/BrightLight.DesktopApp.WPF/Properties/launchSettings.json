@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BrightLight.DesktopApp.WPF": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
